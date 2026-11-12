@@ -2728,21 +2728,40 @@ function renderQuizSetup(el, {mode, chapterId}) {
     `;
     el.querySelector('#startBtn').onclick = () => startQuiz({mode:'oefentoets', chapterId, feedback: el.querySelector('#fbToggle').checked, questions: ch.questions.map(q=>({...q, chapterId: ch.id, chapterTitle: 'Hoofdstuk '+ch.number}))});
   } else {
-    const qs = allQuestions();
+    const all = allQuestions();
     el.innerHTML = `
       <div class="page-eyebrow">Tentamenmodus</div>
       <h2 class="page-title">Simuleer je tentamen</h2>
       <div class="card">
-        <p>Deze tentamentraining combineert vragen uit <strong>alle beschikbare hoofdstukken</strong> (zie de lijst hieronder). In totaal <strong>${qs.length} vragen</strong>, in willekeurige volgorde.</p>
+        <p>Kies welke hoofdstukken je wilt oefenen. De vragen worden elke keer in een <strong>willekeurige volgorde</strong> gezet, en ook de antwoordopties worden geschud.</p>
         <div class="setup-choice">
-          ${CHAPTERS.map(c => `<div class="chapter-check">✔️ Hoofdstuk ${c.number} — ${c.title}</div>`).join('')}
+          ${CHAPTERS.map(c => `<label class="chapter-check fb-toggle" style="margin:6px 0;"><input type="checkbox" class="chSel" value="${c.id}" checked><span>Hoofdstuk ${c.number} — ${c.title} <span style="color:var(--ink-soft);">(${c.questions.length} vragen)</span></span></label>`).join('')}
         </div>
-        <p style="font-size:13px; color:var(--ink-soft);">Tijdens het tentamen kun je met <strong>Terug</strong> en <strong>Volgende</strong> navigeren, vragen overslaan, en vóór het inleveren nog wijzigingen aanbrengen.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin:8px 0 4px;">
+          <button class="btn ghost" id="selAll" type="button">Alles selecteren</button>
+          <button class="btn ghost" id="selNone" type="button">Niets selecteren</button>
+        </div>
+        <p id="qCount" style="font-weight:800; color:var(--mauve); margin-top:12px;"></p>
+        <p style="font-size:13px; color:var(--ink-soft);">Tijdens het tentamen kun je met <strong>Terug</strong> en <strong>Volgende</strong> navigeren, vragen overslaan, en vóór het inleveren nog wijzigingen aanbrengen. Na afloop kun je alleen je foute vragen opnieuw maken.</p>
         <label class="fb-toggle"><input type="checkbox" id="fbToggleT" checked><span>Na elke vraag meteen laten zien of mijn antwoord goed of fout is, met een korte toelichting (zet uit voor een echte tentamensimulatie)</span></label>
         <button class="btn" id="startBtnT">Start tentamen 🎓</button>
       </div>
     `;
-    el.querySelector('#startBtnT').onclick = () => startQuiz({mode:'tentamen', feedback: el.querySelector('#fbToggleT').checked, questions: qs});
+    const selected = () => [...el.querySelectorAll('.chSel')].filter(c => c.checked).map(c => c.value);
+    const upd = () => {
+      const ids = selected();
+      const n = all.filter(q => ids.includes(q.chapterId)).length;
+      el.querySelector('#qCount').textContent = ids.length ? `${n} vragen geselecteerd uit ${ids.length} hoofdstuk${ids.length>1?'ken':''}` : 'Selecteer minstens één hoofdstuk';
+      el.querySelector('#startBtnT').disabled = !ids.length;
+    };
+    el.querySelectorAll('.chSel').forEach(c => c.onchange = upd);
+    el.querySelector('#selAll').onclick = () => { el.querySelectorAll('.chSel').forEach(c => c.checked = true); upd(); };
+    el.querySelector('#selNone').onclick = () => { el.querySelectorAll('.chSel').forEach(c => c.checked = false); upd(); };
+    upd();
+    el.querySelector('#startBtnT').onclick = () => {
+      const ids = selected();
+      startQuiz({mode:'tentamen', feedback: el.querySelector('#fbToggleT').checked, questions: all.filter(q => ids.includes(q.chapterId))});
+    };
   }
 }
 
