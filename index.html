@@ -285,6 +285,14 @@
   .qdot { width: 11px; height: 11px; border-radius:50%; background: var(--border-soft); }
   .qdot.answered { background: var(--pink); }
   .qdot.current { outline: 2px solid var(--mauve); outline-offset:2px; }
+  .qdot.ok { background: var(--good); }
+  .qdot.no { background: var(--bad); }
+  .feedback-box { margin-top: 16px; padding: 14px 16px; border-radius: 14px; font-size: 14px; line-height: 1.55; border: 1.5px solid; }
+  .feedback-box.ok { background: var(--good-bg); border-color: var(--good); }
+  .feedback-box.no { background: var(--bad-bg); border-color: var(--bad); }
+  .feedback-box .fb-title { font-weight: 800; margin-bottom: 4px; }
+  .fb-toggle { display:flex; gap:10px; align-items:flex-start; font-size:14px; margin: 14px 0; cursor:pointer; }
+  .fb-toggle input { margin-top:3px; accent-color: var(--pink-dark); width:17px; height:17px; }
 
   .question-card { background: var(--card-bg); border:1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 30px; }
   .question-meta { display:flex; gap:8px; margin-bottom:12px; }
@@ -452,19 +460,19 @@ const CHAPTERS = [
         correct:'a', explanation:'Automatisering wordt nergens genoemd als kenmerk van de definitie. De vijf elementen zijn: samenhang, beoogd resultaat, toegevoegde waarde, samenhangend geheel en herhaalbaarheid.'},
       {id:'h1q2', topic:'Definitie van een proces', bloom:'begrijpen',
         q:'Waarom voldoet de brede definitie "activiteiten die in samenhang plaatsvinden" volgens het boek niet als definitie van een proces in organisaties?',
-        options:[{id:'a',text:'Omdat hij te specifiek is voor productieprocessen'},{id:'b',text:'Omdat dan bijna alles een proces zou zijn, zoals roddelen of ruziemaken'},{id:'c',text:'Omdat hij geen rekening houdt met IT-systemen'}],
+        options:[{id:'a',text:"Omdat hij te specifiek is voor productieprocessen in een fabrieksomgeving"},{id:'b',text:"Omdat dan bijna alles een proces zou zijn, zoals roddelen of ruziemaken"},{id:'c',text:"Omdat hij geen rekening houdt met de rol van IT-systemen in processen"}],
         correct:'b', explanation:'Het boek noemt expliciet dat deze brede definitie ook roddelen, rouwen of ruziemaken tot een proces zou maken, en dus te weinig onderscheidend is.'},
       {id:'h1q3', topic:'Definitie van een proces', bloom:'toepassen',
         q:'Een team plant elke maandag een informele koffiepauze zonder vast doel of klant die er baat bij heeft. Voldoet dit aan de in het boek gehanteerde definitie van een proces?',
-        options:[{id:'a',text:'Ja, want het gebeurt herhaaldelijk op een vaste dag'},{id:'b',text:'Ja, want iedere activiteit binnen een organisatie is per definitie een proces'},{id:'c',text:'Nee, want er ontbreekt een beoogd resultaat met toegevoegde waarde voor een klant'}],
+        options:[{id:'a',text:"Ja, want het gebeurt herhaaldelijk op een vaste dag en wordt door het hele team bijgewoond"},{id:'b',text:"Ja, want iedere activiteit binnen een organisatie is per definitie een proces op zich"},{id:'c',text:"Nee, want er ontbreekt een beoogd resultaat met toegevoegde waarde voor een klant"}],
         correct:'c', explanation:'Herhaling alleen is niet genoeg: de definitie vereist ook een beoogd resultaat met toegevoegde waarde voor een in- of externe klant.'},
       {id:'h1q4', topic:'Toegevoegde waarde', bloom:'onthouden',
         q:'Hoe wordt "toegevoegde waarde" in het boek gedefinieerd?',
-        options:[{id:'a',text:'Wat een klant méér bereid is te betalen voor een product of dienst dan de kosten van inkoop en totstandkoming'},{id:'b',text:'Het verschil tussen de omzet en de winst van een organisatie'},{id:'c',text:'De totale kostprijs van grondstoffen die een organisatie inkoopt'}],
+        options:[{id:'a',text:"Wat een klant méér bereid is te betalen dan de kosten van inkoop en totstandkoming"},{id:'b',text:"Het verschil tussen de omzet en de winst van een organisatie in een boekjaar"},{id:'c',text:"De totale kostprijs van grondstoffen die een organisatie inkoopt voor productie"}],
         correct:'a', explanation:'Toegevoegde waarde is precies dit verschil: wat de klant méér wil betalen dan de kosten van grondstoffen en totstandkoming.'},
       {id:'h1q5', topic:'Toegevoegde waarde', bloom:'begrijpen',
         q:'Waarom kan een organisatie zonder winstoogmerk (zoals een vakbond of school) volgens het boek toch te maken hebben met het risico van te weinig toegevoegde waarde?',
-        options:[{id:'a',text:'Omdat deze organisaties verplicht zijn winst te maken van de overheid'},{id:'b',text:'Omdat zulke organisaties geen bestaansrecht hebben zolang de buitenwereld geen waarde toekent aan wat ze doen'},{id:'c',text:'Omdat toegevoegde waarde alleen geldt voor commerciële bedrijven'}],
+        options:[{id:'a',text:"Omdat deze organisaties van de overheid verplicht zijn om elk jaar winst te maken en af te dragen"},{id:'b',text:"Omdat zulke organisaties geen bestaansrecht hebben zolang de buitenwereld geen waarde toekent"},{id:'c',text:"Omdat toegevoegde waarde alleen geldt voor commerciële bedrijven die winst willen maken"}],
         correct:'b', explanation:'Het boek stelt dat toegevoegde waarde er alleen is als de buitenwereld bereid is de activiteiten te belonen — bij non-profit door blijvend bestaansrecht toe te kennen.'},
       {id:'h1q6', topic:'Toegevoegde waarde', bloom:'toepassen',
         q:'Een klant is bereid extra te betalen omdat een product in een sfeervolle winkel met goed geschoold personeel wordt verkocht; een andere klant vindt dat niet belangrijk. Wat illustreert dit volgens het boek?',
@@ -476,7 +484,7 @@ const CHAPTERS = [
         correct:'a', explanation:'"Beoogd" duidt op doelgerichtheid — iets dat tegenover toevallige uitkomsten staat.'},
       {id:'h1q8', topic:"Beoogd resultaat", bloom:'begrijpen',
         q:"Wat betekent de term \"beoogd\" in \"beoogd resultaat\" in de definitie van een proces?",
-        options:[{id:'a',text:"Dat het resultaat vooraf wettelijk is vastgelegd"},{id:'b',text:"Dat het resultaat doelgericht wordt nagestreefd bij de inrichting van het proces"},{id:'c',text:"Dat het resultaat telkens exact hetzelfde moet zijn"}],
+        options:[{id:'a',text:"Dat het resultaat vooraf wettelijk is vastgelegd in regels voor de organisatie"},{id:'b',text:"Dat het resultaat doelgericht wordt nagestreefd bij de inrichting van het proces"},{id:'c',text:"Dat het resultaat telkens exact hetzelfde moet zijn bij iedere uitvoering"}],
         correct:'b', explanation:"De term \"beoogd\" benadrukt doelgerichtheid: het resultaat is bij de inrichting van het proces bedoeld en nagestreefd. Waarde die toevallig ontstaat is geen beoogd resultaat."},
       {id:'h1q9', topic:'Beoogd resultaat', bloom:'toepassen',
         q:'Een bezorgdienst levert per ongeluk vaak een dag te vroeg, wat sommige klanten fijn vinden. Wanneer zou dit proces pas echt gericht zijn op een "beoogd resultaat"?',
@@ -496,27 +504,27 @@ const CHAPTERS = [
         correct:'c', explanation:'Technologieontwikkeling staat in figuur 1.1 expliciet als ondersteunende activiteit vermeld.'},
       {id:'h1q13', topic:'Herhaalbaarheid (proces vs. project)', bloom:'onthouden',
         q:'Wat is volgens het boek het belangrijkste verschil tussen een proces en een project?',
-        options:[{id:'a',text:'Herhaalbaarheid: een project wordt gedefinieerd als een unieke opgave'},{id:'b',text:'Een proces levert altijd meer winst op dan een project'},{id:'c',text:'Een project heeft geen klant, een proces wel'}],
+        options:[{id:'a',text:"Herhaalbaarheid: een project wordt gedefinieerd als een unieke opgave"},{id:'b',text:"Een proces levert altijd meer winst op dan een project van gelijke omvang"},{id:'c',text:"Een project heeft geen klant, een proces wel, want alleen dat levert waarde"}],
         correct:'a', explanation:'Het boek noemt herhaalbaarheid als het onderscheidende element; een project is "een unieke opgave".'},
       {id:'h1q14', topic:'Herhaalbaarheid (proces vs. project)', bloom:'begrijpen',
         q:'Waarom is herhaalbaarheid volgens het boek belangrijk voor het managen van verwachtingen van de klant?',
-        options:[{id:'a',text:'Omdat de klant dan nooit meer contact hoeft op te nemen met de organisatie'},{id:'b',text:'Omdat herhaalbaarheid ervoor zorgt dat het resultaat qua inhoud, moment en vorm voorspelbaarder wordt'},{id:'c',text:'Omdat herhaalbaarheid garandeert dat een proces nooit meer verandert'}],
+        options:[{id:'a',text:"Omdat de klant dan nooit meer contact hoeft op te nemen met de organisatie over levering"},{id:'b',text:"Omdat het resultaat door herhaalbaarheid qua inhoud, moment en vorm voorspelbaarder wordt"},{id:'c',text:"Omdat herhaalbaarheid garandeert dat een proces nooit meer verandert na de invoering"}],
         correct:'b', explanation:'Herhaalbaarheid maakt het resultaat voorspelbaarder in inhoud, moment en vorm, waardoor verwachtingen beter gemanaged kunnen worden.'},
       {id:'h1q15', topic:'Herhaalbaarheid (proces vs. project)', bloom:'toepassen',
         q:'Een verbouwingsbedrijf plant vooraf exact op welke dag welke stap gebeurt en bouwt bewust speelruimte (slack) in de planning in, waardoor de einddatum tot op de dag klopt. Wat illustreert dit voorbeeld (Serbo) vooral?',
-        options:[{id:'a',text:'Dat bouwprojecten per definitie onvoorspelbaar blijven'},{id:'b',text:'Dat flexibiliteit van medewerkers niet nodig is als de planning goed is'},{id:'c',text:'Dat een schijnbaar uniek "project" door procesmanagement toch een hoge mate van voorspelbaarheid en dus proceskarakter kan krijgen'}],
+        options:[{id:'a',text:"Dat bouwprojecten door hun unieke karakter per definitie onvoorspelbaar blijven"},{id:'b',text:"Dat flexibiliteit van medewerkers niet nodig is zolang de planning goed is opgesteld"},{id:'c',text:"Dat procesmanagement een uniek project toch voorspelbaar en procesmatig kan maken"}],
         correct:'c', explanation:'Het voorbeeld laat zien dat door procesmanagement toe te passen, een uniek project een voorspelbaarheid krijgt die het meer op een proces doet lijken.'},
       {id:'h1q16', topic:'Definitie procesmanagement', bloom:'onthouden',
         q:'Welke drie werkwoorden gebruikt het boek om procesmanagement te omschrijven?',
-        options:[{id:'a',text:'Bepalen van doelen (richten), bepalen hoe de organisatie eruit moet zien (inrichten), activiteiten uitvoeren (verrichten)'},{id:'b',text:'Plannen, uitvoeren, controleren'},{id:'c',text:'Ontwerpen, testen, opleveren'}],
+        options:[{id:'a',text:"Bepalen van doelen (richten), bepalen hoe de organisatie eruitziet (inrichten), uitvoeren (verrichten)"},{id:'b',text:"Plannen van de activiteiten, uitvoeren van het werk, controleren van het resultaat en bijsturen"},{id:'c',text:"Ontwerpen van het proces, testen van de werking, opleveren aan de klant en daarna beheren"}],
         correct:'a', explanation:'Het boek gebruikt letterlijk richten, inrichten en verrichten om procesmanagement te omschrijven.'},
       {id:'h1q17', topic:"Definitie procesmanagement", bloom:'onthouden',
         q:"Hoe wordt procesmanagement (of \"Business Process Management\") in het boek gedefinieerd?",
-        options:[{id:'a',text:"Een methodiek waarin processen worden gedocumenteerd om kwaliteit te borgen"},{id:'b',text:"Een managementbenadering waarin processen leidend zijn voor richten, inrichten en sturen van de organisatie"},{id:'c',text:"Een softwarebenadering waarin processen worden geautomatiseerd"}],
+        options:[{id:'a',text:"Een methodiek waarin processen worden gedocumenteerd en vastgelegd om kwaliteit te borgen"},{id:'b',text:"Een managementbenadering waarin processen leidend zijn voor richten, inrichten en sturen"},{id:'c',text:"Een softwarebenadering waarin processen worden geautomatiseerd en gemonitord via tooling"}],
         correct:'b', explanation:"Procesmanagement is volgens het boek een managementbenadering waarin processen leidend zijn voor het richten van de organisatie op doelstellingen, het optimaal inrichten van de organisatie en het sturing geven aan de uitvoering, teneinde de doelstellingen te realiseren. Het is dus geen methodiek of tooling."},
       {id:'h1q18', topic:'Definitie procesmanagement', bloom:'toepassen',
         q:'Een organisatie koopt alleen nieuwe procesmanagementsoftware, zonder iets te veranderen aan doelen, sturing of uitvoering. Sluit dit aan bij hoe het boek procesmanagement definieert?',
-        options:[{id:'a',text:'Ja, want procesmanagement draait primair om de juiste tooling'},{id:'b',text:'Ja, mits de software door de IT-afdeling wordt beheerd'},{id:'c',text:'Nee, want procesmanagement is een managementbenadering waarin processen leidend zijn voor richten, inrichten én sturing geven aan uitvoering'}],
+        options:[{id:'a',text:"Ja, want procesmanagement draait primair om de juiste tooling en de inzet van software"},{id:'b',text:"Ja, mits de software door de IT-afdeling wordt beheerd en regelmatig wordt bijgewerkt"},{id:'c',text:"Nee, want procesmanagement is een managementbenadering waarin processen leidend zijn"}],
         correct:'c', explanation:'Procesmanagement is volgens de definitie een managementbenadering, geen tooling — het gaat om richten, inrichten en sturing geven aan uitvoering.'},
       {id:'h1q19', topic:'Niveaus van procesmanagement', bloom:'onthouden',
         q:'Op welke drie niveaus vindt procesmanagement volgens het boek plaats?',
@@ -536,11 +544,11 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt klantoriëntatie, efficiency, wendbaarheid en bewustzijn bij medewerkers als redenen — niet automatische winstmargegroei.'},
       {id:'h1q23', topic:'Waarom procesdenken belangrijk is', bloom:'begrijpen',
         q:'Waarom noemt het boek het voorkomen van overdrachtspunten als manier om efficiënter te werken?',
-        options:[{id:'a',text:'Omdat overdrachtspunten wettelijk verboden zijn'},{id:'b',text:'Omdat overdrachtspunten een bron zijn van onnodige vertraging en fouten in processen'},{id:'c',text:'Omdat overdrachtspunten altijd tot hogere kosten voor de klant leiden'}],
+        options:[{id:'a',text:"Omdat overdrachtspunten wettelijk verboden zijn bij processen die meerdere afdelingen raken"},{id:'b',text:"Omdat overdrachtspunten een bron zijn van onnodige vertraging en fouten in processen"},{id:'c',text:"Omdat overdrachtspunten altijd tot hogere kosten voor de klant leiden bij elke levering"}],
         correct:'b', explanation:'Het boek noemt overdrachtspunten expliciet als bron van onnodige vertraging en fouten.'},
       {id:'h1q24', topic:'Waarom procesdenken belangrijk is', bloom:'toepassen',
         q:'Een medewerker die gewend was alleen naar zijn eigen afdelingstaak te kijken, gaat na het analyseren van de waardeketen zijn collega bij de volgende afdeling als "interne klant" beschouwen. Welke door het boek genoemde reden om in processen te denken wordt hier zichtbaar?',
-        options:[{id:'a',text:'Het vergroten van de financiële winst per activiteit'},{id:'b',text:'Het verkorten van de openingstijden van de organisatie'},{id:'c',text:'Het bewuster maken van medewerkers van de toegevoegde waarde van hun eigen activiteiten'}],
+        options:[{id:'a',text:"Het vergroten van de financiële winst per activiteit binnen de hele organisatie"},{id:'b',text:"Het verkorten van de openingstijden van de organisatie voor klanten en leveranciers"},{id:'c',text:"Het bewuster maken van medewerkers van de toegevoegde waarde van hun eigen activiteiten"}],
         correct:'c', explanation:'Dit is precies de vierde reden uit het boek: medewerkers worden zich bewuster van de toegevoegde waarde van hun eigen activiteiten door collega\'s als interne klant te zien.'},
       {id:'h1q25', topic:'Procesgerichte organisatie', bloom:'onthouden',
         q:'Welke van de volgende is GEEN van de zeven kenmerken die het boek noemt voor een procesgerichte organisatie?',
@@ -548,7 +556,7 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek stelt juist dat klantwaardering een belangrijkere indicator is dan kostenindicatoren — het tegenovergestelde van dit antwoord.'},
       {id:'h1q26', topic:'Procesgerichte organisatie', bloom:'begrijpen',
         q:'Waarom is er in een procesgerichte organisatie volgens het boek juist méér ruimte voor creatieve en ondernemende professionals?',
-        options:[{id:'a',text:'Omdat processen in zo\'n organisatie helemaal niet meer beheerst worden'},{id:'b',text:'Omdat goed ingerichte processen mensen in staat stellen te doen waar ze goed in zijn en betekenisvol werk te leveren'},{id:'c',text:'Omdat creativiteit alleen relevant is voor artsen en advocaten'}],
+        options:[{id:'a',text:"Omdat processen in zo'n organisatie helemaal niet meer beheerst worden of bijgestuurd"},{id:'b',text:"Omdat goed ingerichte processen mensen in staat stellen te doen waar ze goed in zijn"},{id:'c',text:"Omdat creativiteit alleen relevant is voor beroepen zoals artsen en advocaten"}],
         correct:'b', explanation:'Het boek stelt dat goed ingerichte processen mensen juist in staat stellen te doen waar ze goed in zijn en optimaal toegevoegde waarde te leveren.'},
       {id:'h1q27', topic:'Procesgerichte organisatie', bloom:'toepassen',
         q:'Een leidinggevende besteedt steeds minder tijd aan het controleren van medewerkers en steeds meer tijd aan het coachen van teams en het wegnemen van belemmeringen. Welk kenmerk van een procesgerichte organisatie past hierbij?',
@@ -556,15 +564,15 @@ const CHAPTERS = [
         correct:'c', explanation:'Dit is letterlijk het vijfde kenmerk: van dirigeren en controleren naar faciliteren en coachen.'},
       {id:'h1q28', topic:'Conclusie hoofdstuk 1', bloom:'onthouden',
         q:'Welke drie combinaties noemt het boek in de conclusie die organisaties alleen via een procesbenadering kunnen realiseren?',
-        options:[{id:'a',text:'Klantgerichtheid en efficiency, beheersing en flexibiliteit, resultaatgerichtheid en ruimte voor professionals'},{id:'b',text:'Winstmaximalisatie, kostenreductie en marktaandeel'},{id:'c',text:'Digitalisering, automatisering en outsourcing'}],
+        options:[{id:'a',text:"Klantgerichtheid en efficiency, beheersing en flexibiliteit, resultaatgerichtheid en ruimte voor professionals"},{id:'b',text:"Winstmaximalisatie, kostenreductie en marktaandeel, aangevuld met snelheid en schaalvoordeel bij groei"},{id:'c',text:"Digitalisering, automatisering en outsourcing, aangevuld met standaardisatie en schaalvoordeel bij groei"}],
         correct:'a', explanation:'Dit zijn letterlijk de drie combinaties die het boek in de conclusie noemt.'},
       {id:'h1q29', topic:'Conclusie hoofdstuk 1', bloom:'begrijpen',
         q:'Waarom betekenen de elementen "toegevoegde waarde" en "beoogd resultaat" in de definitie van proces dat een proces per definitie gericht is op belanghebbenden buiten het proces zelf?',
-        options:[{id:'a',text:'Omdat een proces alleen bestaat als de organisatie zelf er baat bij heeft'},{id:'b',text:'Omdat toegevoegde waarde en beoogd resultaat gaan om waarde voor een klant, vaak buiten het eigen proces'},{id:'c',text:'Omdat elk proces wettelijk extern gecontroleerd moet worden'}],
+        options:[{id:'a',text:"Omdat een proces alleen bestaat als de organisatie zelf er financieel baat bij heeft"},{id:'b',text:"Omdat toegevoegde waarde en beoogd resultaat om waarde voor een klant gaan"},{id:'c',text:"Omdat elk proces wettelijk extern gecontroleerd moet worden door een toezichthouder"}],
         correct:'b', explanation:'Toegevoegde waarde en beoogd resultaat zijn per definitie gericht op een klant, die zich buiten het proces zelf bevindt.'},
       {id:'h1q30', topic:'Conclusie hoofdstuk 1', bloom:'toepassen',
         q:'Welke beschrijving past het beste bij de "ideale procesgerichte organisatie" zoals in de conclusie van hoofdstuk 1 omschreven?',
-        options:[{id:'a',text:'Sterk hiërarchisch en verticaal aangestuurd, met strikte controle op elke activiteit'},{id:'b',text:'Volledig gericht op kostenbesparing zonder aandacht voor klantbeleving'},{id:'c',text:'Sterk klantgericht en horizontaal georganiseerd, met vertrouwen en empowerment als belangrijke waarden'}],
+        options:[{id:'a',text:"Sterk hiërarchisch en verticaal aangestuurd, met strikte controle op elke activiteit en taak"},{id:'b',text:"Volledig gericht op kostenbesparing, zonder aandacht voor klantbeleving of het personeel"},{id:'c',text:"Sterk klantgericht en horizontaal georganiseerd, met vertrouwen en empowerment"}],
         correct:'c', explanation:'De conclusie beschrijft de ideale procesgerichte organisatie letterlijk als sterk klantgericht en horizontaal, met vertrouwen en empowerment als kernwaarden.'}
     ]
   },
@@ -629,11 +637,11 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt drie toepassingen: inzicht bieden via een scan, gedachtewisseling op gang brengen, en verbetermogelijkheden identificeren — automatische winstgroei staat er niet bij.'},
       {id:'h2q2', topic:'Doel van een maturity model', bloom:'begrijpen',
         q:'Waarom is het bij een (quick)scan met een maturity model volgens het boek niet zozeer belangrijk om objectief te scoren op de dimensies van het model?',
-        options:[{id:'a',text:'Omdat scores toch nooit vergeleken mogen worden met andere organisaties'},{id:'b',text:'Omdat het vooral gaat om een gezamenlijk bewustzijn en gedeelde overtuiging bij het management over de te nemen stappen'},{id:'c',text:'Omdat het model uitsluitend bedoeld is voor externe accountants'}],
+        options:[{id:'a',text:"Omdat scores toch nooit vergeleken mogen worden met andere organisaties of eerdere metingen"},{id:'b',text:"Omdat het vooral gaat om gezamenlijk bewustzijn en gedeelde overtuiging over de te nemen stappen"},{id:'c',text:"Omdat het model uitsluitend bedoeld is voor externe accountants die de procesbeheersing toetsen"}],
         correct:'b', explanation:'Het doel is dat het management een gezamenlijk bewustzijn ontwikkelt van de huidige stand van zaken en een gedeelde overtuiging over de te nemen stappen — niet een exacte score.'},
       {id:'h2q3', topic:'Doel van een maturity model', bloom:'toepassen',
         q:'Een managementteam gebruikt het POM-model om te bepalen wat de kloof is tussen het huidige en het gewenste niveau, en om vast te stellen wat de meest effectieve eerste stappen zijn. Welke toepassing van een maturity model is dit?',
-        options:[{id:'a',text:'Het benchmarken van de organisatie tegen wettelijke normen'},{id:'b',text:'Het vervangen van de accountantscontrole'},{id:'c',text:'Als basis voor het identificeren van verbetermogelijkheden en het bepalen van het ambitieniveau'}],
+        options:[{id:'a',text:"Het benchmarken van de organisatie tegen wettelijke normen en kwaliteitseisen uit de sector"},{id:'b',text:"Het vervangen van de accountantscontrole door een eigen interne procesaudit per afdeling of locatie"},{id:'c',text:"Basis voor het identificeren van verbetermogelijkheden en bepalen van het ambitieniveau"}],
         correct:'c', explanation:'Dit is precies de derde toepassing die het boek noemt: de gap bepalen en het meest effectieve pad naar het gewenste niveau uitzetten.'},
       {id:'h2q4', topic:'Waarom een eigen POM-model', bloom:'onthouden',
         q:'Waarvan zijn veel bestaande BPM maturity modellen afgeleid, die oorspronkelijk bedoeld was voor software-ontwikkelprocessen?',
@@ -641,11 +649,11 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt expliciet dat veel modellen zijn afgeleid van het CMM, dat oorspronkelijk voor software-ontwikkelprocessen bedoeld was.'},
       {id:'h2q5', topic:'Waarom een eigen POM-model', bloom:'begrijpen',
         q:'Wat maakt het POM-model volgens het boek onderscheidend ten opzichte van andere maturity modellen die zich vaak op één of enkele organisatieaspecten richten?',
-        options:[{id:'a',text:'Het is uitsluitend gericht op de ICT-afdeling'},{id:'b',text:'Het kijkt naar de organisatie als geheel en biedt handvatten om bevindingen te vertalen naar concrete acties'},{id:'c',text:'Het kent geen niveaus, maar een doorlopende schaal van 0 tot 100'}],
+        options:[{id:'a',text:"Het is uitsluitend gericht op de ICT-afdeling en op de inrichting van systemen"},{id:'b',text:"Het kijkt naar de organisatie als geheel en biedt handvatten voor concrete acties"},{id:'c',text:"Het kent geen niveaus, maar een doorlopende schaal van 0 tot 100 per afdeling of team"}],
         correct:'b', explanation:'Het boek noemt deze twee punten expliciet als onderscheidend voor het POM-model.'},
       {id:'h2q6', topic:'Waarom een eigen POM-model', bloom:'toepassen',
         q:'Een organisatie heeft KPI\'s beschreven, proceseigenaren benoemd en een BPM-systeem aangeschaft, maar in het managementteam gaat het nog vooral over financiële resultaten en structuurwijzigingen. Wat zegt het boek hierover in het licht van het POM-model?',
-        options:[{id:'a',text:'Dat deze organisatie automatisch op niveau 6 zit omdat ze de juiste instrumenten heeft'},{id:'b',text:'Dat KPI\'s en BPM-systemen altijd een lager volwassenheidsniveau opleveren'},{id:'c',text:'Dat het niet zozeer gaat om instrumenten, maar om de attitude — en dat er dan nog veel te winnen is'}],
+        options:[{id:'a',text:"Dat deze organisatie automatisch op niveau 6 zit, omdat ze alle juiste instrumenten heeft"},{id:'b',text:"Dat KPI's en BPM-systemen altijd een lager volwassenheidsniveau opleveren bij het management"},{id:'c',text:"Dat het niet zozeer om instrumenten gaat maar om de attitude, en dat er nog veel te winnen is"}],
         correct:'c', explanation:'Het boek stelt letterlijk dat instrumenten iets zeggen, maar dat het er meer om gaat waar de aandacht van het management daadwerkelijk naar uitgaat.'},
       {id:'h2q7', topic:'Essentie van het POM-model', bloom:'onthouden',
         q:'Hoeveel volwassenheidsniveaus onderscheidt het POM-model?',
@@ -653,19 +661,19 @@ const CHAPTERS = [
         correct:'a', explanation:'Het POM-model onderscheidt zes niveaus: gefragmenteerd, structurerend, borgend, sturend, lerend en integrerend (keten).'},
       {id:'h2q8', topic:'Essentie van het POM-model', bloom:'begrijpen',
         q:'Welke verschuiving van aandacht treedt volgens het boek op naarmate een organisatie naar een hoger niveau van het POM-model groeit?',
-        options:[{id:'a',text:'Van klantgerichtheid naar uitsluitend interne kostenbeheersing'},{id:'b',text:'Van sturen op taken naar sturen op resultaten van processen als geheel, met focus op toegevoegde waarde voor de klant'},{id:'c',text:'Van procesgericht werken naar volledig functioneel georganiseerd werken'}],
+        options:[{id:'a',text:"Van klantgerichtheid naar uitsluitend interne kostenbeheersing en financiële sturing op de lijn"},{id:'b',text:"Van sturen op taken naar sturen op procesresultaten als geheel, voor de klant"},{id:'c',text:"Van procesgericht werken naar volledig functioneel georganiseerd werken per afdeling of team"}],
         correct:'b', explanation:'Het boek beschrijft letterlijk deze verschuiving van sturen op taken naar sturen op resultaten, met de focus op toegevoegde waarde voor de klant.'},
       {id:'h2q9', topic:'Essentie van het POM-model', bloom:'toepassen',
         q:'Een adviesbureau probeert het volwassenheidsniveau van een organisatie te bepalen door alleen naar de strategie te kijken, zonder cultuur, organisatie-inrichting of ICT te betrekken. Sluit dit aan bij hoe het POM-model op de laagste niveaus bedoeld is te werken?',
-        options:[{id:'a',text:'Ja, want strategie is op elk niveau de enige relevante dimensie'},{id:'b',text:'Ja, want het POM-model kijkt uitsluitend naar de strategie'},{id:'c',text:'Nee, want op de laagste niveaus zijn juist geen eenduidige uitspraken te doen omdat er weinig samenhang tussen deze aspecten bestaat'}],
+        options:[{id:'a',text:"Ja, want strategie is op elk niveau de enige dimensie die er echt toe doet"},{id:'b',text:"Ja, want het POM-model kijkt uitsluitend naar de strategie van een organisatie"},{id:'c',text:"Nee, want op de laagste niveaus is er weinig samenhang tussen deze aspecten"}],
         correct:'c', explanation:'Het boek noemt expliciet dat op de laagste niveaus geen eenduidige uitspraken te doen zijn over de samenhang tussen strategie, cultuur en IT, omdat die samenhang er nog weinig is.'},
       {id:'h2q10', topic:'Niveau 1: gefragmenteerd', bloom:'onthouden',
         q:'Wat is typerend voor de procesbeschrijvingen op niveau 1 (gefragmenteerd)?',
-        options:[{id:'a',text:'Ze zijn toepassingsspecifiek en gericht op het externe doel waarvoor ze gemaakt zijn, zoals een certificaat of IT-systeem'},{id:'b',text:'Ze zijn organisatiebreed afgestemd en gebaseerd op één gezamenlijke methode'},{id:'c',text:'Ze worden uitsluitend gemaakt om de klant rechtstreeks te informeren'}],
+        options:[{id:'a',text:"Ze zijn toepassingsspecifiek en gericht op een extern doel, zoals een certificaat"},{id:'b',text:"Ze zijn organisatiebreed afgestemd en gebaseerd op één gezamenlijke methode of tool"},{id:'c',text:"Ze worden uitsluitend gemaakt om de klant rechtstreeks te informeren over producten"}],
         correct:'a', explanation:'Op niveau 1 zijn procesbeschrijvingen toepassingsspecifiek, gericht op het doel (bijvoorbeeld een certificaat of IT-systeem) waarvoor ze gemaakt zijn.'},
       {id:'h2q11', topic:'Niveau 1: gefragmenteerd', bloom:'begrijpen',
         q:'Waarom is het op niveau 1 lastig om het beheer van procesbeschrijvingen goed te waarborgen?',
-        options:[{id:'a',text:'Omdat er te veel budget beschikbaar is voor procesbeschrijvingen'},{id:'b',text:'Omdat activiteiten projectmatig plaatsvinden en na afloop van het project niet duidelijk is wat beschreven is of wat de status is'},{id:'c',text:'Omdat de directie procesbeschrijvingen verplicht stelt voor alle afdelingen'}],
+        options:[{id:'a',text:"Omdat er te veel budget is voor procesbeschrijvingen binnen de afdelingen"},{id:'b',text:"Omdat activiteiten projectmatig zijn en na afloop onduidelijk is wat beschreven is"},{id:'c',text:"Omdat de directie procesbeschrijvingen verplicht stelt voor alle afdelingen"}],
         correct:'b', explanation:'Het boek noemt dat activiteiten projectmatig plaatsvinden en dat na afronding het beheer van de beschrijvingen lastig te waarborgen is.'},
       {id:'h2q12', topic:'Niveau 1: gefragmenteerd', bloom:'toepassen',
         q:'Een afdeling maakt een procesbeschrijving alleen omdat de accountant dat eist voor een controle, gericht op één specifiek IT-systeem, zonder afstemming met andere afdelingen. Op welk niveau van het POM-model past dit het beste?',
@@ -677,7 +685,7 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt letterlijk dat op niveau 2 de eerste puzzelstukjes van een procesarchitectuur ontstaan, vaak vanuit een IT-invalshoek.'},
       {id:'h2q14', topic:'Niveau 2: structurerend', bloom:'begrijpen',
         q:'Wat is het verschil tussen hoe procesverbetering plaatsvindt op niveau 2 ten opzichte van niveau 1?',
-        options:[{id:'a',text:'Op niveau 2 is procesverbetering volledig verankerd in de lijnorganisatie en niet meer tijdelijk'},{id:'b',text:'Op niveau 2 wordt procesverbetering gecoördineerder aangepakt, bijvoorbeeld in een programma, maar nog steeds in tijdelijke verbanden'},{id:'c',text:'Op niveau 2 verdwijnt de aandacht voor procesverbetering volledig'}],
+        options:[{id:'a',text:"Op niveau 2 is procesverbetering volledig verankerd in de lijn en niet meer tijdelijk van aard"},{id:'b',text:"Op niveau 2 is procesverbetering meer gecoördineerd, maar nog in tijdelijke verbanden"},{id:'c',text:"Op niveau 2 verdwijnt de aandacht voor procesverbetering volledig"}],
         correct:'b', explanation:'Het boek beschrijft dat procesverbetering op niveau 2 meer gecoördineerd wordt, maar nog steeds in tijdelijke verbanden zoals projecten of programma\'s.'},
       {id:'h2q15', topic:'Niveau 2: structurerend', bloom:'toepassen',
         q:'Een organisatie kiest een vastleggingstool voor processen en één afdeling begint de coördinatie van procesactiviteiten op zich te nemen, al is er nog geen zelfstandige BPM-functie. Welk niveau past hierbij?',
@@ -689,7 +697,7 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt dat op niveau 3 producten en diensten, processen en IT doelbewust op elkaar worden afgestemd, met de klantbehoefte centraal.'},
       {id:'h2q17', topic:'Niveau 3: borgend', bloom:'begrijpen',
         q:'Waarom is het opstellen van de procesarchitectuur op niveau 3 door proces- of businessarchitecten (in plaats van door ICT-architecten) van belang?',
-        options:[{id:'a',text:'Omdat ICT-architecten geen toegang mogen hebben tot procesinformatie'},{id:'b',text:'Omdat de architectuur in nauwe samenwerking met lijnmanagers overzicht en inzicht moet geven in de samenhang tussen processen als gezamenlijk referentiekader'},{id:'c',text:'Omdat alleen proces- of businessarchitecten wettelijk bevoegd zijn processen te beschrijven'}],
+        options:[{id:'a',text:"Omdat ICT-architecten geen toegang mogen hebben tot procesinformatie van de afdelingen"},{id:'b',text:"Omdat de architectuur met lijnmanagers als referentiekader overzicht moet geven"},{id:'c',text:"Omdat alleen proces- of businessarchitecten wettelijk bevoegd zijn processen te beschrijven"}],
         correct:'b', explanation:'Het boek benadrukt dat de procesarchitectuur in nauwe samenwerking met lijnmanagers wordt opgesteld en dient als gezamenlijk referentiekader.'},
       {id:'h2q18', topic:'Niveau 3: borgend', bloom:'toepassen',
         q:'Een organisatie richt een zelfstandige BPM-functie in die samen met control, kwaliteitszorg en IT werkt aan standaarden en ontwerpprincipes, en risicomanagement wordt steeds meer in de processen "ingebakken". Welk niveau van het POM-model wordt hier zichtbaar?',
@@ -697,11 +705,11 @@ const CHAPTERS = [
         correct:'c', explanation:'Een zelfstandige BPM-functie die samenwerkt met aanpalende disciplines en risicomanagement dat in processen wordt "ingebakken", is precies wat het boek als niveau 3 beschrijft.'},
       {id:'h2q19', topic:'Niveau 4: sturend', bloom:'onthouden',
         q:'Wat is het dominante ordeningscriterium voor de organisatiestructuur op niveau 4 (sturend)?',
-        options:[{id:'a',text:'Proceseigenaarschap; processturing wordt leidend boven functioneel management'},{id:'b',text:'De grootte van de afdeling'},{id:'c',text:'De geografische locatie van vestigingen'}],
+        options:[{id:'a',text:"Proceseigenaarschap; processturing wordt leidend boven functioneel management"},{id:'b',text:"De grootte van de afdeling, waarbij grote afdelingen eerder leidend zijn"},{id:'c',text:"De geografische locatie van vestigingen, met regiomanagers als leiders"}],
         correct:'a', explanation:'Het boek noemt letterlijk dat proceseigenaarschap op niveau 4 het dominante ordeningscriterium is en processturing leidend wordt boven functioneel management.'},
       {id:'h2q20', topic:'Niveau 4: sturend', bloom:'begrijpen',
         q:'Waarom worden financiële kortetermijnresultaten op niveau 4 minder sturend bij het meten van prestaties?',
-        options:[{id:'a',text:'Omdat financiële metingen op niveau 4 wettelijk verboden worden'},{id:'b',text:'Omdat klanten op dit niveau geen rol meer spelen in de sturing'},{id:'c',text:'Omdat de nadruk verschuift naar hoe klanten de prestaties ervaren en hoe goed veranderdoelen worden bereikt, vanuit de overtuiging dat financiële prestaties dan vanzelf volgen'}],
+        options:[{id:'a',text:"Omdat financiële metingen op niveau 4 wettelijk verboden worden voor het management van de lijn"},{id:'b',text:"Omdat klanten op dit niveau geen rol meer spelen in de sturing van processen"},{id:'c',text:"Omdat de nadruk verschuift naar klantbeleving en veranderdoelen; financieel volgt vanzelf"}],
         correct:'c', explanation:'Het boek beschrijft dat op niveau 4 de nadruk verschuift naar klantbeleving en veranderdoelen, vanuit de overtuiging dat financiële resultaten dan vanzelf zullen volgen.'},
       {id:'h2q21', topic:'Niveau 4: sturend', bloom:'toepassen',
         q:'Een organisatie past haar beloningssystematiek aan zodat medewerkers worden beoordeeld op procesprestaties en klantbeleving in plaats van uitsluitend op financiële kortetermijnresultaten, en de organisatiestructuur is niet langer functioneel maar procesgericht ingedeeld. Welk niveau past hierbij het beste?',
@@ -709,11 +717,11 @@ const CHAPTERS = [
         correct:'c', explanation:'Een procesgerichte beloningssystematiek en organisatiestructuur zijn precies de kenmerken die het boek aan niveau 4 toekent.'},
       {id:'h2q22', topic:'Niveau 5: lerend', bloom:'onthouden',
         q:'Wat vallen op niveau 5 (lerend) samen, waardoor de eindverantwoordelijkheid eenduidig bij de proceseigenaar ligt?',
-        options:[{id:'a',text:'Hiërarchisch/functioneel management en procesmanagement'},{id:'b',text:'ICT en HRM'},{id:'c',text:'Strategie en cultuur'}],
+        options:[{id:'a',text:"Hiërarchisch/functioneel management en procesmanagement"},{id:'b',text:"ICT-beheer en HRM, onder leiding van een centrale directie"},{id:'c',text:"Strategie en cultuur, onder leiding van een centraal bureau"}],
         correct:'a', explanation:'Het boek stelt letterlijk dat op niveau 5 hiërarchisch/functioneel management en procesmanagement samenvallen.'},
       {id:'h2q23', topic:'Niveau 5: lerend', bloom:'begrijpen',
         q:'Waarom gebruiken medewerkers op niveau 5 processen niet meer alleen als iets van managers?',
-        options:[{id:'a',text:'Omdat managers op dit niveau geen rol meer hebben binnen de organisatie'},{id:'b',text:'Omdat procesgericht denken en doen organisatiebreed een vanzelfsprekende houding is geworden, waarmee medewerkers zelf richting geven aan hun werk'},{id:'c',text:'Omdat processen op dit niveau niet meer gemeten worden'}],
+        options:[{id:'a',text:"Omdat managers op dit niveau geen enkele rol meer hebben binnen de organisatie als geheel"},{id:'b',text:"Omdat procesgericht denken en doen vanzelfsprekend is en medewerkers zelf richting geven"},{id:'c',text:"Omdat processen op dit niveau niet meer gemeten worden door de proceseigenaren"}],
         correct:'b', explanation:'Het boek beschrijft dat procesgericht denken en doen op niveau 5 organisatiebreed vanzelfsprekend is en medewerkers zelf richting geven aan hun werk.'},
       {id:'h2q24', topic:'Niveau 5: lerend', bloom:'toepassen',
         q:'Een team gebruikt inzicht in en communicatie over processen om zelf richting te geven aan het werk, de eigen bijdrage zichtbaar te maken en de eigen ondersteuning te organiseren, ondersteund door snel aanpasbare ICT-systemen. Welk niveau van het POM-model past hierbij?',
@@ -721,11 +729,11 @@ const CHAPTERS = [
         correct:'c', explanation:'Dit beschrijft precies de kenmerken die het boek aan niveau 5 toekent: medewerkers die processen zelf gebruiken om richting te geven, ondersteund door moderne ICT.'},
       {id:'h2q25', topic:'Niveau 6: integrerend (keten)', bloom:'onthouden',
         q:'Wat is het belangrijkste verschil tussen niveau 6 (integrerend/keten) en niveau 5 (lerend) volgens het boek?',
-        options:[{id:'a',text:'Op niveau 6 is er een strategische beweging naar buiten toe zichtbaar; de focus verschuift van de eigen organisatie naar de hele keten'},{id:'b',text:'Op niveau 6 wordt procesmanagement voor het eerst geïntroduceerd'},{id:'c',text:'Op niveau 6 verdwijnt de aandacht voor klanten volledig'}],
+        options:[{id:'a',text:"Op niveau 6 is er een strategische beweging naar buiten toe, gericht op de keten"},{id:'b',text:"Op niveau 6 wordt procesmanagement voor het eerst geïntroduceerd binnen de organisatie"},{id:'c',text:"Op niveau 6 verdwijnt de aandacht voor klanten volledig ten gunste van leveranciers"}],
         correct:'a', explanation:'Het boek noemt dat de kenmerken van niveau 5 ook gelden voor niveau 6, met als verschil de strategische beweging naar buiten toe.'},
       {id:'h2q26', topic:'Niveau 6: integrerend (keten)', bloom:'begrijpen',
         q:'Waarom overweegt een organisatie op niveau 6 kritisch welke processen ze nog zelf wil uitvoeren en welke beter door een externe partij kunnen worden gedaan?',
-        options:[{id:'a',text:'Omdat outsourcen op dit niveau wettelijk verplicht is'},{id:'b',text:'Omdat de organisatie flexibel is ingericht op het snel outsourcen of insourcen van processen of procesonderdelen, gezien de gewenste rol en positie in de keten'},{id:'c',text:'Omdat de organisatie op dit niveau geen eigen medewerkers meer heeft'}],
+        options:[{id:'a',text:"Omdat outsourcen op dit niveau wettelijk verplicht is voor alle ketenpartners en klanten"},{id:'b',text:"Omdat de organisatie flexibel is ingericht op outsourcen of insourcen, gezien haar rol"},{id:'c',text:"Omdat de organisatie op dit niveau geen eigen medewerkers meer heeft in dienst of kantoren"}],
         correct:'b', explanation:'Het boek beschrijft dat organisaties op niveau 6 flexibel zijn ingericht op het snel outsourcen of insourcen van processen, gezien hun rol in de keten.'},
       {id:'h2q27', topic:'Niveau 6: integrerend (keten)', bloom:'toepassen',
         q:'Een organisatie meet en optimaliseert procesprestaties niet alleen intern, maar ook samen met klanten en leveranciers over de grenzen van de eigen organisatie heen, met behulp van collaborative KPI\'s. Welk volwassenheidsniveau illustreert dit?',
@@ -733,15 +741,15 @@ const CHAPTERS = [
         correct:'c', explanation:'Ketenbrede meting en collaborative KPI\'s zijn kenmerken die het boek expliciet aan niveau 6 toekent.'},
       {id:'h2q28', topic:'Groeien naar een hoger niveau', bloom:'onthouden',
         q:'Moet volgens het boek iedere organisatie streven naar het hoogste volwassenheidsniveau?',
-        options:[{id:'a',text:'Niet per se — de strategie van een organisatie kan ook zonder de kenmerken van het hoogste niveau gerealiseerd worden, al is te lang blijven steken op niveau 2 of 3 riskant'},{id:'b',text:'Ja, want anders is een organisatie per definitie binnen een jaar failliet'},{id:'c',text:'Ja, want het hoogste niveau is wettelijk verplicht voor alle organisaties'}],
+        options:[{id:'a',text:"Niet per se; de strategie kan ook zonder de kenmerken van het hoogste niveau, al is blijven steken riskant"},{id:'b',text:"Ja, want zonder het hoogste niveau is een organisatie per definitie binnen een jaar failliet, zegt het boek"},{id:'c',text:"Ja, want het hoogste niveau is wettelijk verplicht voor alle organisaties, ook voor publieke dienstverleners"}],
         correct:'a', explanation:'Het boek stelt dat niet elke organisatie het hoogste niveau hoeft na te streven, maar waarschuwt wel voor de risico\'s van te lang blijven steken op een laag niveau.'},
       {id:'h2q29', topic:'Groeien naar een hoger niveau', bloom:'begrijpen',
         q:'Waarom noemt het boek dat het zetten van volgende stappen naar een hoger volwassenheidsniveau vaak niet lukt met "meer van hetzelfde"?',
-        options:[{id:'a',text:'Omdat elke stap exact dezelfde acties vereist, ongeacht het huidige niveau'},{id:'b',text:'Omdat betere modelleertools of ontwerpen fijn zijn, maar niet de benodigde "step change" brengen die nodig is om naar een hoger niveau te groeien'},{id:'c',text:'Omdat modelleertools nooit een rol spelen bij het groeien naar een hoger niveau'}],
+        options:[{id:'a',text:"Omdat elke stap exact dezelfde acties vereist, ongeacht het niveau van de organisatie"},{id:'b',text:"Omdat betere modelleertools wel fijn zijn, maar niet de benodigde \"step change\" geven"},{id:'c',text:"Omdat modelleertools nooit een rol spelen bij het groeien naar een hoger niveau"}],
         correct:'b', explanation:'Het boek stelt letterlijk dat betere modelleertools of ontwerpen fijn zijn, maar niet de benodigde "step change" richting een hoger niveau brengen.'},
       {id:'h2q30', topic:'Groeien naar een hoger niveau', bloom:'toepassen',
         q:'Een organisatie op niveau 3 wil doorgroeien naar niveau 4 en besluit vooral te investeren in het bespreken van besturingsvragen op managementniveau en het vergroten van kennis over proceseigenaarschap. Sluit dit aan bij de handvatten die het boek noemt voor de stap van niveau 3 naar 4?',
-        options:[{id:'a',text:'Nee, want de stap van niveau 3 naar 4 vereist uitsluitend investeringen in nieuwe ICT-tooling'},{id:'b',text:'Nee, want besturingsvragen horen bij de stap van niveau 5 naar 6'},{id:'c',text:'Ja, dit zijn precies de mogelijke acties die het boek noemt om de organisatorische "kanteling" van niveau 4 voor te bereiden'}],
+        options:[{id:'a',text:"Nee, want de stap van niveau 3 naar 4 vereist alleen investeringen in nieuwe ICT-tooling"},{id:'b',text:"Nee, want besturingsvragen horen bij de stap van niveau 5 naar 6 met ketenpartners"},{id:'c',text:"Ja, dit zijn acties die de organisatorische \"kanteling\" van niveau 4 voorbereiden"}],
         correct:'c', explanation:'Het boek noemt letterlijk deze acties — besturingsvragen agenderen en kennis over proceseigenaarschap vergroten — als handvatten voor de stap van niveau 3 naar 4.'}
     ]
   },
@@ -840,7 +848,7 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt acht redenen (kwaliteit, compliance, procesgerichte compliance, architectuur, automatisering, organisatie, strategie-implementatie en communicatie) — bonussen staan er niet bij.'},
       {id:'h3q2', topic:'Redenen om processen vast te leggen', bloom:'begrijpen',
         q:'Wat is het verschil tussen de reden "compliance" en "procesgerichte compliance" zoals het boek die noemt?',
-        options:[{id:'a',text:'Compliance gaat over het voldoen aan regels in het algemeen, terwijl procesgerichte compliance specifiek vereist dat de processen zelf zijn vastgelegd om aantoonbaar beheerst te zijn'},{id:'b',text:'Compliance en procesgerichte compliance zijn in het boek exact hetzelfde begrip'},{id:'c',text:'Procesgerichte compliance heeft uitsluitend betrekking op marketingprocessen'}],
+        options:[{id:'a',text:"Compliance is voldoen aan regels in het algemeen; procesgerichte compliance eist dat de processen zijn vastgelegd om ze aantoonbaar te beheersen"},{id:'b',text:"Compliance betreft alleen interne afspraken, procesgerichte compliance alle externe wetgeving, ook wanneer processen niet zijn vastgelegd"},{id:'c',text:"Procesgerichte compliance heeft uitsluitend betrekking op marketingprocessen, terwijl compliance alle overige processen van de organisatie omvat"}],
         correct:'a', explanation:'Procesgerichte compliance is specifiek gericht op regelgeving die vereist dat processen zelf zijn vastgelegd, met als doel aantoonbare beheersing.'},
       {id:'h3q3', topic:'Redenen om processen vast te leggen', bloom:'toepassen',
         q:'Een financiële instelling moet processen vastleggen omdat een accountant eist dat processen aantoonbaar beheerst zijn, los van een specifiek kwaliteitscertificaat. Welke reden om processen vast te leggen past hier het beste bij?',
@@ -852,23 +860,23 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt vijf eisen; wie de beschrijving schrijft (directie of niet) staat er niet bij.'},
       {id:'h3q5', topic:'Eisen aan procesbeschrijvingen', bloom:'begrijpen',
         q:'Waarom is het volgens het boek niet wenselijk om voor ieder doel (kwaliteit, compliance, automatisering, enzovoort) een aparte procesbeschrijving te maken?',
-        options:[{id:'a',text:'Omdat wetgeving aparte beschrijvingen per doel verbiedt'},{id:'b',text:'Omdat dit behalve veel werk ook verwarring oplevert doordat hetzelfde werk op verschillende manieren wordt beschreven'},{id:'c',text:'Omdat een procesbeschrijving wettelijk maar één keer per jaar mag worden aangepast'}],
+        options:[{id:'a',text:"Omdat wetgeving aparte beschrijvingen per doel verbiedt en een proces maar één keer mag worden vastgelegd"},{id:'b',text:"Omdat het veel werk en verwarring oplevert als hetzelfde werk steeds anders wordt beschreven"},{id:'c',text:"Omdat een procesbeschrijving wettelijk maar één keer per jaar mag worden aangepast door de afdeling"}],
         correct:'b', explanation:'Het boek noemt expliciet dat aparte beschrijvingen per doel veel werk en verwarring opleveren.'},
       {id:'h3q6', topic:'Eisen aan procesbeschrijvingen', bloom:'toepassen',
         q:'Een organisatie zorgt ervoor dat haar procesbeschrijvingen tegelijk inzicht geven in klantresultaten, laten zien hoe aan regelgeving wordt voldaan, een basis bieden voor sturing én begrijpelijk zijn voor de mensen die ermee werken. Wat past hier het beste bij?',
-        options:[{id:'a',text:'Acht losse beschrijvingen, één voor elk van de genoemde redenen'},{id:'b',text:'Een procesbeschrijving die uitsluitend voor de ICT-afdeling bedoeld is'},{id:'c',text:'Eén samenhangende procesbeschrijving die meerdere doelen tegelijk dient, zoals het boek aanbeveelt'}],
+        options:[{id:'a',text:"Acht losse beschrijvingen, één voor elk van de genoemde redenen, elk door een andere afdeling gemaakt"},{id:'b',text:"Eén beschrijving die uitsluitend voor de ICT-afdeling bedoeld is en vooral op het nieuwe systeem aansluit"},{id:'c',text:"Eén samenhangende beschrijving die tegelijk meerdere doelen dient en door de gebruikers begrepen wordt"}],
         correct:'c', explanation:'Dit is precies wat het boek aanbeveelt: procesbeschrijvingen die tegelijkertijd aan meerdere doelen voldoen.'},
       {id:'h3q7', topic:'IST en SOLL, modelleren en ontwerpen', bloom:'onthouden',
         q:'Wat is het verschil tussen "IST" en "SOLL" zoals het boek dat gebruikt?',
-        options:[{id:'a',text:'IST is hoe processen feitelijk plaatsvinden, SOLL is het gewenste, ideale procesverloop'},{id:'b',text:'IST is de Duitse term voor procesmodellering, SOLL voor procesontwerp'},{id:'c',text:'IST staat voor interne standaard, SOLL voor strategische ontwerpleidraad'}],
+        options:[{id:'a',text:"IST is het feitelijke procesverloop, SOLL het gewenste, ideale procesverloop van hetzelfde proces"},{id:'b',text:"IST is de Duitse term voor procesmodellering, SOLL de Duitse term voor het ontwerpen van processen"},{id:'c',text:"IST staat voor interne standaard, SOLL voor strategische ontwerpleidraad van de organisatie"}],
         correct:'a', explanation:'Het boek gebruikt "IST" voor het feitelijke procesverloop en "SOLL" voor het gewenste, ideale procesverloop.'},
       {id:'h3q8', topic:'IST en SOLL, modelleren en ontwerpen', bloom:'begrijpen',
         q:'Wat is volgens het boek het verschil tussen "modelleren" en "ontwerpen" van een proces?',
-        options:[{id:'a',text:'Modelleren en ontwerpen zijn in het boek volledig inwisselbare synoniemen'},{id:'b',text:'Modelleren geeft de huidige of toekomstige werkelijkheid weer zonder dat het per se om vernieuwing gaat; ontwerpen is het resultaat van nadenken over hoe het proces er het beste uit kan zien'},{id:'c',text:'Modelleren is alleen voor ICT-systemen, ontwerpen alleen voor mensen'}],
+        options:[{id:'a',text:"Modelleren en ontwerpen zijn volgens het boek volledig inwisselbaar, beide betekenen het tekenen van een schema"},{id:'b',text:"Modelleren is het weergeven van de werkelijkheid; ontwerpen is nadenken over hoe het beter kan"},{id:'c',text:"Modelleren is alleen bedoeld voor ICT-systemen, terwijl ontwerpen uitsluitend voor werk van mensen geldt"}],
         correct:'b', explanation:'Het boek maakt dit onderscheid expliciet: modelleren gaat over weergeven, ontwerpen over nadenken over verbetering.'},
       {id:'h3q9', topic:'IST en SOLL, modelleren en ontwerpen', bloom:'toepassen',
         q:'Een team tekent hoe een proces op dit moment daadwerkelijk verloopt, zonder daarbij keuzes te maken over verbeteringen. Is dit volgens het boek modelleren of ontwerpen?',
-        options:[{id:'a',text:'Ontwerpen, want elk schema van een proces is per definitie een ontwerp'},{id:'b',text:'Geen van beide, want dit valt buiten de definitie van een procesbeschrijving'},{id:'c',text:'Modelleren, want het gaat om het weergeven van de huidige werkelijkheid, niet om vernieuwing of keuzes'}],
+        options:[{id:'a',text:"Ontwerpen, want elk schema van een proces is per definitie een ontwerp van dat proces"},{id:'b',text:"Geen van beide, want het vastleggen van de huidige situatie valt buiten een procesbeschrijving"},{id:'c',text:"Modelleren, want de huidige werkelijkheid wordt weergegeven zonder vernieuwing of keuzes"}],
         correct:'c', explanation:'Het weergeven van de huidige situatie zonder keuzes over verbetering is precies wat het boek "modelleren" noemt.'},
       {id:'h3q10', topic:'Niveaus van procesbeschrijvingen', bloom:'onthouden',
         q:'Welke vier niveaus van procesbeschrijvingen onderscheidt het boek?',
@@ -876,7 +884,7 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek onderscheidt letterlijk deze vier niveaus van procesbeschrijvingen (figuur 3.1).'},
       {id:'h3q11', topic:'Niveaus van procesbeschrijvingen', bloom:'begrijpen',
         q:'Waarom is een lager niveau van procesbeschrijving volgens het boek meer dan alleen een detaillering van het hogere niveau?',
-        options:[{id:'a',text:'Omdat elk niveau volledig losstaat van de andere niveaus en geen enkele relatie heeft'},{id:'b',text:'Omdat de verschillende typen beschrijvingen verschillende "views", gezichtspunten op de(zelfde) werkelijkheid vormen'},{id:'c',text:'Omdat lagere niveaus altijd door een andere organisatie worden gemaakt dan hogere niveaus'}],
+        options:[{id:'a',text:"Omdat elk niveau volledig losstaat van de andere niveaus en geen enkele relatie met die niveaus heeft"},{id:'b',text:"Omdat elk niveau een eigen \"view\" is: een ander gezichtspunt op de(zelfde) werkelijkheid"},{id:'c',text:"Omdat lagere niveaus altijd door een andere organisatie worden gemaakt dan de hogere niveaus"}],
         correct:'b', explanation:'Het boek noemt expliciet dat de verschillende niveaus verschillende gezichtspunten op dezelfde werkelijkheid zijn, niet alleen een detaillering.'},
       {id:'h3q12', topic:'Niveaus van procesbeschrijvingen', bloom:'toepassen',
         q:'Een model laat zien hoe een organisatie samen met andere organisaties in dezelfde waardeketen toegevoegde waarde creëert, en wat de eigen positie daarin is. Op welk niveau van procesbeschrijving hoort dit model?',
@@ -884,35 +892,35 @@ const CHAPTERS = [
         correct:'c', explanation:'Dit is precies wat het boek als ketenniveau (het ketenmodel) beschrijft.'},
       {id:'h3q13', topic:'Bedrijfsproces vs. werkproces', bloom:'onthouden',
         q:'Wat is volgens tabel 3.1 een kenmerk van een bedrijfsproces, in tegenstelling tot een werkproces?',
-        options:[{id:'a',text:'Een bedrijfsproces bestaat slechts op één niveau, terwijl werkprocessen op verschillende subniveaus kunnen bestaan'},{id:'b',text:'Een bedrijfsproces heeft nooit een externe klant, een werkproces altijd'},{id:'c',text:'Een bedrijfsproces wordt altijd door meerdere organisaties samen uitgevoerd'}],
+        options:[{id:'a',text:"Een bedrijfsproces bestaat op slechts één niveau; werkprocessen kunnen op meerdere subniveaus bestaan"},{id:'b',text:"Een bedrijfsproces heeft nooit een externe klant, terwijl een werkproces er altijd een heeft"},{id:'c',text:"Een bedrijfsproces wordt altijd door meerdere organisaties samen uitgevoerd, een werkproces nooit"}],
         correct:'a', explanation:'Het boek noemt expliciet dat bedrijfsprocessen op één niveau bestaan, terwijl werkprocessen op meerdere subniveaus kunnen bestaan.'},
       {id:'h3q14', topic:'Bedrijfsproces vs. werkproces', bloom:'begrijpen',
         q:'Waarom noemt het boek werkprocesbeschrijvingen "van cruciaal belang" voor de verdere inrichting van bijvoorbeeld besturing, organisatie-inrichting en informatietechnologie?',
-        options:[{id:'a',text:'Omdat werkprocesbeschrijvingen wettelijk verplicht zijn voor elke organisatie'},{id:'b',text:'Omdat ze als enige niveau geschikt zijn om aan klanten te laten zien'},{id:'c',text:'Omdat ze de samenhang tussen de activiteitenclusters waaruit bedrijfsprocessen zijn opgebouwd inzichtelijk maken, wat helpt bij het maken van goede inrichtingskeuzes'}],
+        options:[{id:'a',text:"Omdat ze wettelijk verplicht zijn voor elke organisatie die haar besturing en ICT wil inrichten"},{id:'b',text:"Omdat ze als enige niveau geschikt zijn om aan klanten en toezichthouders te laten zien"},{id:'c',text:"Omdat ze inzicht geven in de activiteitenclusters van bedrijfsprocessen, nuttig voor inrichtingskeuzes"}],
         correct:'c', explanation:'Het boek stelt dat werkprocesbeschrijvingen helpen bij het maken van goede keuzes voor de verdere inrichting, juist omdat ze deze samenhang inzichtelijk maken.'},
       {id:'h3q15', topic:'Bedrijfsproces vs. werkproces', bloom:'toepassen',
         q:'Een bedrijfsproces "afhandelen van een verzekeringsclaim" wordt opgedeeld in kleinere, samenhangende blokken werk die elk een eigen naam krijgen, zoals "beoordelen van de claim" en "uitbetalen van de claim". Op welk niveau van procesbeschrijving bevinden deze blokken zich?',
-        options:[{id:'a',text:'Ketenniveau'},{id:'b',text:'Uitvoeringsniveau'},{id:'c',text:'Organisatieonderdeelniveau (werkprocesniveau)'}],
+        options:[{id:'a',text:"Ketenniveau, het niveau waarop organisatieoverstijgend toegevoegde waarde wordt gecreëerd"},{id:'b',text:"Uitvoeringsniveau, het niveau van procesflows, procedures en werkinstructies voor een geval"},{id:'c',text:"Organisatieonderdeelniveau (werkprocesniveau), de toegevoegdewaardebrokken met een eigen naam"}],
         correct:'c', explanation:'Het opknippen van een bedrijfsproces in benoemde toegevoegdewaardebrokken is precies het startpunt van het werkprocesniveau.'},
       {id:'h3q16', topic:'Procesflow, procedure en werkinstructie', bloom:'onthouden',
         q:'Waar ligt bij een procesflow de nadruk, volgens het boek?',
-        options:[{id:'a',text:'Op de vraag in welke volgorde welke processtappen worden doorlopen voor een bepaald type geval (case)'},{id:'b',text:'Op de vraag wie binnen de organisatie de eindverantwoordelijkheid draagt'},{id:'c',text:'Op de vraag hoeveel budget een proces jaarlijks kost'}],
+        options:[{id:'a',text:"Op in welke volgorde welke processtappen voor een type geval worden doorlopen"},{id:'b',text:"Op wie binnen de organisatie de eindverantwoordelijkheid voor het proces draagt en inricht"},{id:'c',text:"Op hoeveel budget en capaciteit een proces jaarlijks kost aan de organisatie en de keten"}],
         correct:'a', explanation:'Het boek beschrijft dat bij een procesflow de nadruk ligt op de vraag "in welke volgorde doorloop ik welke processtappen?".'},
       {id:'h3q17', topic:'Procesflow, procedure en werkinstructie', bloom:'begrijpen',
         q:'Wat is het verschil tussen een procedure en een werkinstructie zoals het boek die definieert?',
-        options:[{id:'a',text:'Een procedure en een werkinstructie zijn in het boek exact dezelfde term'},{id:'b',text:'Een procedure beschrijft de voorgeschreven opeenvolging van handelingen door verschillende functionarissen of systemen, terwijl een werkinstructie kennis en kunde expliciet maakt vanuit het perspectief van één specifieke rol'},{id:'c',text:'Een werkinstructie geldt altijd voor de hele organisatie, een procedure alleen voor één afdeling'}],
+        options:[{id:'a',text:"Een procedure en een werkinstructie zijn in het boek hetzelfde, alleen de naam verschilt per afdeling"},{id:'b',text:"Een procedure legt de opeenvolging van handelingen vast; een werkinstructie de kennis en kunde voor één rol"},{id:'c',text:"Een werkinstructie geldt altijd voor de hele organisatie, een procedure uitsluitend voor één afdeling"}],
         correct:'b', explanation:'Dit is precies het onderscheid dat het boek maakt tussen een procedure en een werkinstructie.'},
       {id:'h3q18', topic:'Procesflow, procedure en werkinstructie', bloom:'toepassen',
         q:'Een document beschrijft precies welke stappen gezet moeten worden bij het afhandelen van een specifieke klacht van een nieuwe klant, inclusief de volgorde van meerdere processtappen over verschillende werkprocessen heen. Is dit vooral een procesflow of een werkinstructie?',
-        options:[{id:'a',text:'Een werkinstructie, omdat het over één specifieke medewerker gaat'},{id:'b',text:'Een ketenmodel, omdat er meerdere werkprocessen bij betrokken zijn'},{id:'c',text:'Een procesflow, omdat het gaat om de volgorde van processtappen voor een specifiek type geval over werkprocessen heen'}],
+        options:[{id:'a',text:"Een werkinstructie, want het document draait om de kennis en kunde van één specifieke medewerker"},{id:'b',text:"Een ketenmodel, want het document laat zien hoe meerdere organisaties samen waarde leveren"},{id:'c',text:"Een procesflow, want het gaat om de volgorde van processtappen voor een specifiek type geval"}],
         correct:'c', explanation:'De volgorde van processtappen voor een specifiek geval, over werkprocessen heen, is precies wat het boek een procesflow noemt.'},
       {id:'h3q19', topic:'Werken vanuit wat er al is', bloom:'onthouden',
         q:'Wat is volgens het boek een goed startpunt als een organisatie geen procesbeschrijvingen heeft die aan alle definities en eisen voldoen?',
-        options:[{id:'a',text:'De bestaande beschrijvingen typeren en de ontbrekende niveaus aanvullen, in plaats van helemaal opnieuw te beginnen'},{id:'b',text:'Alle bestaande beschrijvingen direct weggooien en met een schone lei beginnen'},{id:'c',text:'Wachten tot er een nieuw ICT-systeem wordt aangeschaft voordat er iets gedaan wordt'}],
+        options:[{id:'a',text:"De bestaande beschrijvingen typeren en de ontbrekende niveaus aanvullen"},{id:'b',text:"Alle bestaande beschrijvingen direct weggooien en met een schone lei beginnen"},{id:'c',text:"Wachten tot er een nieuw ICT-systeem wordt aangeschaft en dan pas beginnen"}],
         correct:'a', explanation:'Het boek adviseert letterlijk om bestaande beschrijvingen te typeren en ontbrekende niveaus aan te vullen.'},
       {id:'h3q20', topic:'Werken vanuit wat er al is', bloom:'begrijpen',
         q:'Waarom lopen er op het niveau van werkprocessen geen individuele gevallen (cases) door het proces, maar groepen gevallen?',
-        options:[{id:'a',text:'Omdat werkprocessen per definitie nooit met klanten te maken hebben'},{id:'b',text:'Omdat pas op het niveau van procesflows en procedures specifieke, individuele gevallen in beeld komen'},{id:'c',text:'Omdat individuele gevallen alleen op ketenniveau bestaan'}],
+        options:[{id:'a',text:"Omdat werkprocessen per definitie nooit iets met klanten of hun vragen te maken hebben"},{id:'b',text:"Omdat pas bij procesflows en procedures specifieke, individuele gevallen in beeld komen"},{id:'c',text:"Omdat individuele gevallen alleen op ketenniveau worden vastgelegd en nergens daaronder"}],
         correct:'b', explanation:'Het boek stelt expliciet dat pas op het niveau van procesflows en procedures specifieke gevallen in beeld komen.'},
       {id:'h3q21', topic:'Werken vanuit wat er al is', bloom:'toepassen',
         q:'Een bedrijfsproces wordt uitgewerkt door het op te knippen in "toegevoegdewaardebrokken" die elk een naam krijgen, en vervolgens wordt elk van die brokken verder "uiteengerafeld" tot op het niveau van processtappen. Welke stap in het uitwerken van niveaus beschrijft dit?',
@@ -924,19 +932,19 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt letterlijk maximaal zeven processtappen of activiteiten per schema.'},
       {id:'h3q23', topic:'Basisregels voor modelleren', bloom:'begrijpen',
         q:'Waarom adviseert het boek om processen zo veel mogelijk "van klant tot klant" te modelleren?',
-        options:[{id:'a',text:'Omdat de klant altijd zelf de processtappen moet uitvoeren'},{id:'b',text:'Omdat een proces zo start met een behoefte of vraag van de klant en eindigt met een resultaat dat invulling geeft aan die behoefte'},{id:'c',text:'Omdat processen zonder klant volgens het boek niet mogen worden vastgelegd'}],
+        options:[{id:'a',text:"Omdat de klant zelf alle processtappen uitvoert, van de eerste vraag tot de laatste overdracht"},{id:'b',text:"Omdat een proces dan start met een behoefte van de klant en eindigt met een resultaat daarvoor"},{id:'c',text:"Omdat processen zonder klant volgens het boek nooit vastgelegd mogen worden in een model"}],
         correct:'b', explanation:'Het boek beschrijft precies dit als de reden achter de "van klant tot klant"-basisregel.'},
       {id:'h3q24', topic:'Basisregels voor modelleren', bloom:'toepassen',
         q:'Een procesmodelleur noemt een proces "het maken van brood" en wil daar "verkopen van brood" als subproces van maken. Is dit een logische naamgeving volgens de basisregels van het boek?',
-        options:[{id:'a',text:'Ja, want elk denkbaar vervolg op een proces mag als subproces worden benoemd'},{id:'b',text:'Ja, want de naamgeving van subprocessen is in het boek volledig vrij'},{id:'c',text:'Nee, want de onderliggende subprocessen moeten "logisch optelbaar" zijn naar de naam van het hoofdproces; "bereiden van deeg" en "bakken van brood" zijn wel logische subprocessen van "maken van brood"'}],
+        options:[{id:'a',text:"Ja, want elk denkbaar vervolg op een proces mag als subproces worden benoemd in hetzelfde model"},{id:'b',text:"Ja, want de naamgeving van subprocessen is in het boek volledig vrij te kiezen door de modelleur"},{id:'c',text:"Nee, want subprocessen moeten logisch optelbaar zijn; \"bereiden van deeg\" past wel, \"verkopen\" niet"}],
         correct:'c', explanation:'Dit is letterlijk het voorbeeld dat het boek gebruikt om de naamgevingsregel toe te lichten.'},
       {id:'h3q25', topic:'Modelleringsmethoden (vier benaderingen)', bloom:'onthouden',
         q:'Welke vier basisbenaderingen van procesmodelleringsmethoden onderscheidt het boek?',
-        options:[{id:'a',text:'De black-box- (systeem-)benadering, de transactiebenadering, de petrinet-benadering en de taakbenadering'},{id:'b',text:'De financiële, de juridische, de technische en de sociale benadering'},{id:'c',text:'IDEF, BPMN, DEMO en UML'}],
+        options:[{id:'a',text:"De black-box- (systeem-), transactie-, petrinet- en taakbenadering van processen"},{id:'b',text:"De financiële, juridische, technische en sociale benadering van een proces in organisaties"},{id:'c',text:"De IDEF-, BPMN-, DEMO- en UML-benadering van het vastleggen van processen"}],
         correct:'a', explanation:'Het boek onderscheidt letterlijk deze vier basisbenaderingen, waaraan alle methoden, tools en technieken te relateren zijn.'},
       {id:'h3q26', topic:'Modelleringsmethoden (vier benaderingen)', bloom:'begrijpen',
         q:'Waarom noemt het boek Business Process Reengineering en Six Sigma "onterecht" procesmodelleringsmethoden?',
-        options:[{id:'a',text:'Omdat Business Process Reengineering en Six Sigma helemaal niet bestaan'},{id:'b',text:'Omdat ze zich richten op andere doelen, zoals het verbeteren van processen, en niet op het modelleren ervan'},{id:'c',text:'Omdat ze uitsluitend gebruikt worden voor ICT-systemen en niet voor processen'}],
+        options:[{id:'a',text:"Omdat Business Process Reengineering en Six Sigma in de praktijk eigenlijk helemaal niet bestaan"},{id:'b',text:"Omdat ze zich richten op andere doelen, zoals het verbeteren van processen, niet op het modelleren"},{id:'c',text:"Omdat ze uitsluitend voor het inrichten van ICT-systemen worden gebruikt en niet voor processen"}],
         correct:'b', explanation:'Het boek legt uit dat deze methoden zich op andere doelen richten (verbeteren) dan procesmodellering.'},
       {id:'h3q27', topic:'Modelleringsmethoden (vier benaderingen)', bloom:'toepassen',
         q:'Een methode beschouwt een proces als een transactie met de buitenwereld, waarbij communicatie tussen medewerkers, klanten en toeleveranciers centraal staat om afspraken en acceptatie van resultaten tot stand te brengen. Welke methode en benadering past hier het beste bij?',
@@ -948,11 +956,11 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt letterlijk dat IDEF0 voor modellen op bedrijfs- en werkprocesniveau meestal prima voldoet.'},
       {id:'h3q29', topic:'Keuze methode, kanttekeningen en conclusie', bloom:'begrijpen',
         q:'Waarom waarschuwt het boek ervoor dat procesmodelleren niet alleen iets van stafafdelingen moet zijn?',
-        options:[{id:'a',text:'Omdat stafafdelingen wettelijk geen processen mogen beschrijven'},{id:'b',text:'Omdat het vastleggen van processen anders een doel op zich kan worden zonder dat klanten of medewerkers daarbij gebaat zijn; het moet zo veel mogelijk bij lijnmanagers worden belegd'},{id:'c',text:'Omdat lijnmanagers altijd meer technische kennis hebben dan stafafdelingen'}],
+        options:[{id:'a',text:"Omdat stafafdelingen wettelijk geen processen mogen beschrijven die de lijn aangaan, volgens het boek"},{id:'b',text:"Omdat vastleggen anders een doel op zich wordt; het hoort zo veel mogelijk bij lijnmanagers"},{id:'c',text:"Omdat lijnmanagers altijd meer technische kennis hebben dan de medewerkers van stafafdelingen heel"}],
         correct:'b', explanation:'Het boek noemt expliciet dit risico en adviseert procesmodelleren zo veel mogelijk bij lijnmanagers te beleggen.'},
       {id:'h3q30', topic:'Keuze methode, kanttekeningen en conclusie', bloom:'toepassen',
         q:'Een organisatie probeert een complex onderhandelingsproces, waarbij het vooral gaat om het afstemmen van belangen tussen partijen, tot in detail vast te leggen in een strak processchema. Sluit dit aan bij wat het boek adviseert voor dit soort processen?',
-        options:[{id:'a',text:'Ja, want elk proces moet volgens het boek tot op het niveau van handelingen worden vastgelegd'},{id:'b',text:'Ja, want onderhandelingsprocessen zijn volgens het boek juist de makkelijkste processen om te modelleren'},{id:'c',text:'Nee, want complexe processen zoals onderhandelingsprocessen zijn lastig te modelleren op lage detailniveaus; beter is de samenhang tussen resultaten weer te geven en andere methoden te gebruiken voor de inhoud van taken'}],
+        options:[{id:'a',text:"Ja, want elk proces moet volgens het boek tot op het niveau van handelingen worden vastgelegd in een schema"},{id:'b',text:"Ja, want onderhandelingsprocessen zijn volgens het boek juist de makkelijkste processen om te modelleren"},{id:'c',text:"Nee, want complexe processen zijn op lage detailniveaus lastig te modelleren; geef de samenhang tussen resultaten weer"}],
         correct:'c', explanation:'Het boek noemt onderhandelingsprocessen expliciet als voorbeeld van processen die lastig te modelleren zijn op lage detailniveaus.'}
     ]
   },
@@ -1020,23 +1028,23 @@ const CHAPTERS = [
     questions: [
       {id:'h4q1', topic:'Wat is een bedrijfsprocesmodel', bloom:'onthouden',
         q:'Wat geeft een bedrijfsprocesmodel weer, volgens het boek?',
-        options:[{id:'a',text:'Een beeld van de processen van klant tot klant op het hoogste niveau, en wat bepalend is voor het succesvol opereren van de organisatie'},{id:'b',text:'Een gedetailleerde beschrijving van elke individuele handeling binnen de organisatie'},{id:'c',text:'Uitsluitend de organisatiestructuur en de rapportagelijnen'}],
+        options:[{id:'a',text:"Een beeld van de processen van klant tot klant op het hoogste niveau, en wat bepalend is voor succes"},{id:'b',text:"Een gedetailleerde beschrijving van elke handeling en taak binnen de afdelingen van de organisatie"},{id:'c',text:"Alleen de organisatiestructuur, de functies en de rapportagelijnen tussen afdelingen en directie"}],
         correct:'a', explanation:'Het boek definieert het bedrijfsprocesmodel letterlijk als een beeld van de processen van klant tot klant op het hoogste niveau.'},
       {id:'h4q2', topic:'Wat is een bedrijfsprocesmodel', bloom:'begrijpen',
         q:'Waarom wordt het bedrijfsprocesmodel in het boek de "elevator pitch" van de processenkapstok genoemd?',
-        options:[{id:'a',text:'Omdat het model alleen gebruikt wordt tijdens korte liftgesprekken met investeerders'},{id:'b',text:'Omdat het, net als een elevator pitch, in het kort de essentie van de organisatie laat zien: wat ze wil betekenen voor de buitenwereld'},{id:'c',text:'Omdat het model uitsluitend bedoeld is om snel personeel te werven'}],
+        options:[{id:'a',text:"Omdat het model alleen gebruikt wordt tijdens korte liftgesprekken met investeerders en bestuurders"},{id:'b',text:"Omdat het net als een elevator pitch kort de essentie laat zien van wat de organisatie wil betekenen"},{id:'c',text:"Omdat het model uitsluitend bedoeld is om snel nieuw personeel te werven en in te werken in de keten"}],
         correct:'b', explanation:'Het boek maakt deze vergelijking expliciet: zoals een elevator pitch in het kort de essentie overbrengt, doet het bedrijfsprocesmodel dat voor de organisatie.'},
       {id:'h4q3', topic:'Wat is een bedrijfsprocesmodel', bloom:'toepassen',
         q:'Een organisatie maakt een model dat laat zien welke toegevoegde waarde ze aan welke klantgroepen wil leveren, hoe die waarde globaal tot stand komt, en wat haar onderscheidt van concurrenten. Is dit een bedrijfsprocesmodel zoals het boek dat beschrijft?',
-        options:[{id:'a',text:'Nee, want een bedrijfsprocesmodel mag nooit iets over klantgroepen zeggen'},{id:'b',text:'Nee, want een bedrijfsprocesmodel gaat uitsluitend over ICT-systemen'},{id:'c',text:'Ja, dit zijn precies de elementen die het boek noemt waarnaar een bedrijfsprocesmodel strategische keuzes vertaalt'}],
+        options:[{id:'a',text:"Nee, want een bedrijfsprocesmodel mag nooit iets over klantgroepen of toegevoegde waarde zeggen"},{id:'b',text:"Nee, want een bedrijfsprocesmodel gaat uitsluitend over ICT-systemen en de koppelingen daartussen"},{id:'c',text:"Ja, dit zijn de elementen waarnaar een bedrijfsprocesmodel strategische keuzes vertaalt"}],
         correct:'c', explanation:'Deze elementen (toegevoegde waarden, klantgroepen, voortbrenging, onderscheidend vermogen) zijn letterlijk wat het boek noemt.'},
       {id:'h4q4', topic:'Scope van het bedrijfsprocesmodel', bloom:'onthouden',
         q:'Hoe kan de scope van een bedrijfsprocesmodel er volgens het boek uitzien als klantgerichte processen over de grenzen van de organisatie heen lopen?',
-        options:[{id:'a',text:'Dan kan het handig zijn om een bredere scope te hanteren en te beginnen met een ketenbedrijfsprocesmodel'},{id:'b',text:'Dan moet het bedrijfsprocesmodel per definitie worden stopgezet'},{id:'c',text:'Dan mag het bedrijfsprocesmodel alleen nog door de ICT-afdeling worden gemaakt'}],
+        options:[{id:'a',text:"Dan kan het handig zijn om een bredere scope te hanteren en te beginnen met een ketenbedrijfsprocesmodel"},{id:'b',text:"Dan moet het bedrijfsprocesmodel per definitie worden stopgezet totdat de keten is gereorganiseerd"},{id:'c',text:"Dan mag het bedrijfsprocesmodel alleen nog door de ICT-afdeling worden gemaakt en vastgesteld"}],
         correct:'a', explanation:'Het boek noemt letterlijk het ketenbedrijfsprocesmodel als oplossing wanneer processen over organisatiegrenzen heen lopen.'},
       {id:'h4q5', topic:'Scope van het bedrijfsprocesmodel', bloom:'begrijpen',
         q:'Waarom betekent "bedrijfsprocesmodel" volgens het boek niet per definitie dat zo\'n model de hele organisatie omvat?',
-        options:[{id:'a',text:'Omdat een bedrijfsprocesmodel wettelijk nooit meer dan drie processen mag bevatten'},{id:'b',text:'Omdat een bedrijfsprocesmodel ook kan worden opgesteld voor een zelfstandig organisatieonderdeel dat van klant tot klant opereert'},{id:'c',text:'Omdat een bedrijfsprocesmodel alleen voor non-profitorganisaties bedoeld is'}],
+        options:[{id:'a',text:"Omdat een bedrijfsprocesmodel wettelijk nooit meer dan drie processen mag bevatten per organisatie"},{id:'b',text:"Omdat het ook voor een zelfstandig organisatieonderdeel kan worden opgesteld dat van klant tot klant werkt"},{id:'c',text:"Omdat een bedrijfsprocesmodel alleen bedoeld is voor non-profitorganisaties en overheidsdiensten"}],
         correct:'b', explanation:'Het boek noemt expliciet dat een bedrijfsprocesmodel ook voor een zelfstandig organisatieonderdeel kan worden opgesteld.'},
       {id:'h4q6', topic:"Wat is een bedrijfsprocesmodel", bloom:'begrijpen',
         q:"Wat laat een bedrijfsprocesmodel volgens het boek impliciet ook zien, al is daar soms een vertaalslag voor nodig?",
@@ -1044,59 +1052,59 @@ const CHAPTERS = [
         correct:'c', explanation:"Een bedrijfsprocesmodel laat impliciet ook zien welke producten en diensten de organisatie levert, al is daar soms een vertaalslag voor nodig. Door wie en met welk systeem processen worden uitgevoerd blijkt er juist niet uit: de procesplaten zijn inrichtingsonafhankelijk."},
       {id:'h4q7', topic:'Waaruit bestaat een bedrijfsprocesmodel', bloom:'onthouden',
         q:'Waaruit bestaat een bedrijfsprocesmodel, naast de visuele procesplaten?',
-        options:[{id:'a',text:'Een toelichting op de gemaakte keuzes en een korte typering van de onderdelen van het model'},{id:'b',text:'Uitsluitend een gedetailleerde technische ICT-specificatie'},{id:'c',text:'Een volledige financiële jaarrekening van de organisatie'}],
+        options:[{id:'a',text:"Een toelichting op de gemaakte keuzes en een korte typering van de onderdelen van het model"},{id:'b',text:"Alleen een gedetailleerde technische ICT-specificatie met alle koppelingen en datastromen erin"},{id:'c',text:"Een volledige financiële jaarrekening van de organisatie, inclusief de begroting en prognoses"}],
         correct:'a', explanation:'Het boek noemt letterlijk deze toelichting en typering als tweede onderdeel van een bedrijfsprocesmodel.'},
       {id:'h4q8', topic:'Waaruit bestaat een bedrijfsprocesmodel', bloom:'begrijpen',
         q:'Wat betekent het dat procesplaten van een bedrijfsprocesmodel "inrichtingsonafhankelijk" moeten zijn?',
-        options:[{id:'a',text:'Dat de organisatie de processen nooit mag veranderen nadat het model is gemaakt'},{id:'b',text:'Dat uit de beschrijving niet is op te maken door wie (welke afdeling/functionaris) en met welk systeem of hulpmiddel de processen worden uitgevoerd'},{id:'c',text:'Dat het model uitsluitend in een specifiek softwarepakket gemaakt mag worden'}],
+        options:[{id:'a',text:"Dat de organisatie de processen nooit meer mag veranderen nadat het model is gemaakt en vastgesteld"},{id:'b',text:"Dat niet te zien is door wie (afdeling/functionaris) en met welk systeem de processen worden uitgevoerd"},{id:'c',text:"Dat het model uitsluitend gemaakt mag worden in een specifiek softwarepakket, zoals een modelleertool"}],
         correct:'b', explanation:'Het boek definieert inrichtingsonafhankelijk letterlijk op deze manier.'},
       {id:'h4q9', topic:'Waaruit bestaat een bedrijfsprocesmodel', bloom:'toepassen',
         q:'Een procesplaat van een bedrijfsprocesmodel is voor buitenstaanders zonder procesachtergrond lastig te lezen en roept de reactie op "hebben jullie daar nu zo lang over gedaan?". Wat zegt het boek hierover?',
-        options:[{id:'a',text:'Dat is een teken dat het model te eenvoudig is en dringend uitgebreider moet worden'},{id:'b',text:'Dat is onvermijdelijk, want bedrijfsprocesmodellen zijn volgens het boek altijd voor specialisten bedoeld'},{id:'c',text:'Modelleren is ondergeschikt aan de noodzakelijke communicatiekracht; een bedrijfsprocesmodelplaat moet juist eenvoudig te lezen zijn, ook voor mensen zonder procesachtergrond'}],
+        options:[{id:'a',text:"Dat is een teken dat het model te eenvoudig is en dringend uitgebreider moet worden gemaakt voor specialisten"},{id:'b',text:"Dat is onvermijdelijk, want bedrijfsprocesmodellen zijn volgens het boek altijd voor specialisten bedoeld"},{id:'c',text:"Modelleren is ondergeschikt aan communicatiekracht; de plaat moet juist eenvoudig te lezen zijn, ook voor leken"}],
         correct:'c', explanation:'Het boek noemt deze reactie letterlijk als mogelijk gevolg van een goede, eenvoudig te lezen plaat — communicatiekracht staat voorop.'},
       {id:'h4q10', topic:'Opstellen als onderdeel van strategieontwikkeling', bloom:'onthouden',
         q:'Welke aanpak om tot een bedrijfsprocesmodel te komen noemt het boek het meest logisch in het kader van procesgericht organiseren?',
-        options:[{id:'a',text:'Een top-downaanpak, waarbij visie, strategie en doelstellingen vertaald worden naar een procesplaat'},{id:'b',text:'Een aanpak waarbij uitsluitend de IT-afdeling het model zelfstandig opstelt'},{id:'c',text:'Een aanpak waarbij elk bedrijfsproces willekeurig wordt gekozen zonder strategie'}],
+        options:[{id:'a',text:"Een top-downaanpak, waarbij visie, strategie en doelstellingen vertaald worden naar een procesplaat"},{id:'b',text:"Een aanpak waarbij alleen de IT-afdeling het model zelfstandig opstelt op basis van de systemen"},{id:'c',text:"Een aanpak waarbij elk bedrijfsproces willekeurig wordt gekozen zonder rekening met de strategie"}],
         correct:'a', explanation:'Het boek noemt de top-downaanpak expliciet als het meest logisch voor een procesgerichte organisatie.'},
       {id:'h4q11', topic:'Opstellen als onderdeel van strategieontwikkeling', bloom:'begrijpen',
         q:'Waarom is voldoende interactie met de strategische top bij het opstellen van een bedrijfsprocesmodel zo belangrijk, volgens het boek?',
-        options:[{id:'a',text:'Omdat de strategische top wettelijk verplicht is elk procesmodel persoonlijk te tekenen'},{id:'b',text:'Omdat bij het concretiseren van visie en strategie in een procesmodel vaak blijkt dat strategische keuzes nog niet scherp genoeg zijn of op verschillende manieren te interpreteren zijn'},{id:'c',text:'Omdat interactie met de top de enige manier is om het model snel klaar te krijgen'}],
+        options:[{id:'a',text:"Omdat de strategische top wettelijk verplicht is om elk procesmodel persoonlijk te tekenen en te accorderen"},{id:'b',text:"Omdat bij het concretiseren van strategie in een procesmodel vaak blijkt dat keuzes nog niet scherp genoeg zijn"},{id:'c',text:"Omdat interactie met de top de enige manier is om het model snel klaar te krijgen en uit te rollen"}],
         correct:'b', explanation:'Het boek noemt expliciet dat deze verheldering van strategische keuzes een bijproduct is van het opstellen van het bedrijfsprocesmodel.'},
       {id:'h4q12', topic:'Opstellen als onderdeel van strategieontwikkeling', bloom:'toepassen',
         q:'Een organisatie laat het opstellen van haar bedrijfsprocesmodel volledig over aan een extern analistenbureau, zonder betrokkenheid van de directie. Sluit dit aan bij hoe het boek adviseert een bedrijfsprocesmodel op te stellen?',
-        options:[{id:'a',text:'Ja, want een bedrijfsprocesmodel is volgens het boek altijd een zuiver technische exercitie'},{id:'b',text:'Ja, want directiebetrokkenheid is volgens het boek juist een valkuil'},{id:'c',text:'Nee, want het boek benadrukt dat het opstellen een voortzetting van het strategietraject moet zijn, met voldoende interactie met de strategische top'}],
+        options:[{id:'a',text:"Ja, want een bedrijfsprocesmodel is volgens het boek altijd een zuiver technische exercitie voor analisten"},{id:'b',text:"Ja, want directiebetrokkenheid is volgens het boek juist een valkuil bij het opstellen van het model"},{id:'c',text:"Nee, want het opstellen moet een voortzetting zijn van het strategietraject, met voldoende interactie met de top"}],
         correct:'c', explanation:'Het boek stelt expliciet dat dit geen activiteit is die aan analisten of architecten kan worden overgelaten.'},
       {id:'h4q13', topic:'Stappenplan: klanten en toegevoegde waarde', bloom:'onthouden',
         q:'Wat is de eerste stap van het stappenplan om tot een bedrijfsprocesmodel te komen?',
-        options:[{id:'a',text:'Het benoemen van klanten en andere belanghebbenden in de buitenwereld'},{id:'b',text:'Het samenbrengen van de essentie in een visuele weergave'},{id:'c',text:'Het benoemen van kritieke succesfactoren'}],
+        options:[{id:'a',text:"Het benoemen van klanten en andere belanghebbenden in de buitenwereld"},{id:'b',text:"Het samenbrengen van de essentie in een visuele weergave van het model"},{id:'c',text:"Het benoemen van kritieke succesfactoren per waardestroom in het model"}],
         correct:'a', explanation:'Dit is letterlijk stap 1 van het stappenplan.'},
       {id:'h4q14', topic:"Stappenplan: klanten en toegevoegde waarde", bloom:'begrijpen',
         q:"Waarom wordt bij het benoemen van de essentiële toegevoegde waarde (stap 2) vaak breder gekeken dan de directe klant?",
-        options:[{id:'a',text:"Omdat directe klanten volgens het boek niet belangrijk zijn"},{id:'b',text:"Omdat het gaat om alle belanghebbenden (stakeholders) in de buitenwereld"},{id:'c',text:"Omdat een bedrijfsprocesmodel altijd de hele keten omvat"}],
+        options:[{id:'a',text:"Omdat directe klanten volgens het boek niet belangrijk zijn voor de toegevoegde waarde van het bedrijf"},{id:'b',text:"Omdat het gaat om alle belanghebbenden (stakeholders) in de buitenwereld van de organisatie"},{id:'c',text:"Omdat een bedrijfsprocesmodel altijd de hele keten omvat, inclusief alle toeleveranciers van de organisatie"}],
         correct:'b', explanation:"Bij stap 2 wordt vaak breder gekeken dan de directe klant, naar alle belanghebbenden (stakeholders). Een bedrijfsprocesmodel hoeft niet per definitie de hele keten te omvatten."},
       {id:'h4q15', topic:'Stappenplan: klanten en toegevoegde waarde', bloom:'toepassen',
         q:'Een managementteam stelt voor elke benoemde klantgroep vast met welke toegevoegde waarde de organisatie zich bij die groep wil onderscheiden, zonder dat er vooraf één juist antwoord is. Welke stap van het stappenplan wordt hier doorlopen?',
-        options:[{id:'a',text:'Stap 5: onderscheiden van bedrijfsprocessen'},{id:'b',text:'Stap 6: samenbrengen van de essentie in een visuele weergave'},{id:'c',text:'Stap 2: benoemen van essentiële toegevoegde waarde per klantgroep'}],
+        options:[{id:'a',text:"Stap 5: onderscheiden van bedrijfsprocessen binnen de organisatie"},{id:'b',text:"Stap 6: samenbrengen van de essentie in een visuele weergave"},{id:'c',text:"Stap 2: benoemen van essentiële toegevoegde waarde per klantgroep"}],
         correct:'c', explanation:'Dit is precies hoe het boek stap 2 beschrijft.'},
       {id:'h4q16', topic:'Stappenplan: waardestromen en KSF\'s', bloom:'onthouden',
         q:'Wat is een waardestroom, zoals het boek die definieert?',
-        options:[{id:'a',text:'Een visuele weergave van de manier waarop betekenisvolle zaken worden opgeteld tot iets dat waarde heeft voor klanten'},{id:'b',text:'Een financieel overzicht van alle inkomsten van een bedrijfsproces'},{id:'c',text:'Een synoniem voor een bedrijfsproces, exact hetzelfde begrip'}],
+        options:[{id:'a',text:"Een visuele weergave van hoe betekenisvolle zaken worden opgeteld tot iets dat waarde heeft voor klanten"},{id:'b',text:"Een financieel overzicht van alle inkomsten en kosten van een bedrijfsproces in een bepaald boekjaar"},{id:'c',text:"Een synoniem voor een bedrijfsproces: het is exact hetzelfde begrip, met precies dezelfde betekenis"}],
         correct:'a', explanation:'Dit is letterlijk de definitie van een waardestroom uit het boek.'},
       {id:'h4q17', topic:'Stappenplan: waardestromen en KSF\'s', bloom:'begrijpen',
         q:'Wat is het verschil tussen een waardestroom en een bedrijfsproces volgens het boek?',
-        options:[{id:'a',text:'Een waardestroom en een bedrijfsproces zijn in het boek volledig identieke begrippen'},{id:'b',text:'Een waardestroom is een potentieel bedrijfsproces, maar niet hetzelfde: meerdere waardestromen kunnen samengevoegd worden tot één bedrijfsproces, of één waardestroom kan over meer bedrijfsprocessen verdeeld worden'},{id:'c',text:'Een waardestroom bestaat alleen op ketenniveau, een bedrijfsproces alleen op organisatieniveau'}],
+        options:[{id:'a',text:"Een waardestroom en een bedrijfsproces zijn in het boek volledig identieke begrippen die door elkaar worden gebruikt"},{id:'b',text:"Een waardestroom is een potentieel bedrijfsproces, maar niet hetzelfde: stromen kunnen worden samengevoegd of verdeeld"},{id:'c',text:"Een waardestroom bestaat alleen op ketenniveau, terwijl een bedrijfsproces alleen op organisatieniveau voorkomt"}],
         correct:'b', explanation:'Het boek maakt dit onderscheid expliciet bij de uitleg van waardestromen.'},
       {id:'h4q18', topic:"Stappenplan: waardestromen en KSF's", bloom:'begrijpen',
         q:"Wat zijn kritieke succesfactoren (KSF's) in stap 4 van het stappenplan voor het bedrijfsprocesmodel?",
-        options:[{id:'a',text:"Alle activiteiten die per waardestroom worden uitgevoerd"},{id:'b',text:"De financiële doelen die de directie per klantgroep vaststelt"},{id:'c',text:"Zaken die cruciaal zijn voor het succesvol creëren van toegevoegde waarde en specifieke aandacht vragen, geen vanzelfsprekendheden"}],
+        options:[{id:'a',text:"Alle activiteiten die per waardestroom worden uitgevoerd, van de eerste handeling tot en met de laatste"},{id:'b',text:"De financiële doelen die de directie per klantgroep vaststelt, inclusief de omzet- en winstdoelstellingen"},{id:'c',text:"Zaken die cruciaal zijn voor het succesvol creëren van toegevoegde waarde en specifieke aandacht vragen"}],
         correct:'c', explanation:"In stap 4 wordt per waardestroom benoemd wat cruciaal is voor het succesvol creëren van toegevoegde waarde: de kritieke succesfactoren. Het zijn geen vanzelfsprekendheden, maar zaken die specifieke aandacht vragen."},
       {id:'h4q19', topic:'Stappenplan: bedrijfsprocessen onderscheiden', bloom:'onthouden',
         q:'Waar moet een proces volgens het boek aan voldoen om als bedrijfsproces te worden aangemerkt?',
-        options:[{id:'a',text:'Het is een relatief autonoom proces, en het is gericht op een extern product/dienst (primair), op sturing aan primaire processen (besturend), of op het in stand houden van middelen (facilitair)'},{id:'b',text:'Het moet altijd minstens honderd medewerkers in dienst hebben'},{id:'c',text:'Het moet uitsluitend door de ICT-afdeling worden uitgevoerd'}],
+        options:[{id:'a',text:"Relatief autonoom, en gericht op een extern product/dienst, op sturing van primaire processen of op middelen"},{id:'b',text:"Het moet altijd minstens honderd medewerkers in dienst hebben en een eigen afdeling met een eigen budget"},{id:'c',text:"Het moet uitsluitend door de ICT-afdeling worden uitgevoerd, met een eigen systeem en een vaste procesmanager"}],
         correct:'a', explanation:'Dit zijn letterlijk de voorwaarden die het boek noemt om een proces als bedrijfsproces aan te merken.'},
       {id:'h4q20', topic:"Stappenplan: bedrijfsprocessen onderscheiden", bloom:'begrijpen',
         q:"Waarop worden gelijkwaardige clusters van activiteiten volgens stap 5 gewogen om bedrijfsprocessen te onderscheiden?",
-        options:[{id:'a',text:"Alleen de afdeling waar de activiteiten worden uitgevoerd"},{id:'b',text:"Overeenkomsten in producten en markten, vergelijkbare KSF's, vergelijkbare procestypering en volume of belang"},{id:'c',text:"Vooral het ICT-systeem dat de activiteiten ondersteunt"}],
+        options:[{id:'a',text:"Alleen de afdeling waar de activiteiten worden uitgevoerd en het aantal medewerkers dat daar werkzaam is"},{id:'b',text:"Overeenkomsten in producten en markten, vergelijkbare KSF's, vergelijkbare procestypering en volume of belang"},{id:'c',text:"Vooral het ICT-systeem dat de activiteiten ondersteunt en de leverancier die dat systeem beheert en levert"}],
         correct:'b', explanation:"Bij het onderscheiden van bedrijfsprocessen wordt gestreefd naar gelijkwaardige clusters van activiteiten, gewogen op overeenkomst in producten/markten, vergelijkbare KSF's, vergelijkbare procestypering en volume/belang."},
       {id:'h4q21', topic:'Stappenplan: bedrijfsprocessen onderscheiden', bloom:'toepassen',
         q:'Een verzekeraar biedt standaardpolissen aan die een klant direct via internet kan afnemen, zonder enige aanpassing. Welke vorm van productie-inrichting past hier het beste bij, volgens de typering uit het boek?',
@@ -1104,15 +1112,15 @@ const CHAPTERS = [
         correct:'c', explanation:'Dit is letterlijk het voorbeeld dat het boek geeft bij make-to-stock voor verzekeringspolissen.'},
       {id:'h4q22', topic:'Stappenplan: visuele weergave', bloom:'onthouden',
         q:'Waar moet een bedrijfsprocesmodelplaat volgens het boek vooral aan voldoen qua visuele weergave?',
-        options:[{id:'a',text:'Het moet in één oogopslag duidelijk maken wat de boodschap is; beter meerdere eenvoudige platen dan één groot complex model'},{id:'b',text:'Het moet zo veel mogelijk details in één plaat samenvoegen om volledigheid te garanderen'},{id:'c',text:'Het moet uitsluitend in zwart-wit worden weergegeven zonder enige structuur'}],
+        options:[{id:'a',text:"Het moet in één oogopslag duidelijk zijn wat de boodschap is; liever meerdere eenvoudige platen dan één complexe"},{id:'b',text:"Het moet zo veel mogelijk details in één plaat samenvoegen om de volledigheid van het model te garanderen"},{id:'c',text:"Het moet uitsluitend in zwart-wit worden weergegeven, zonder enige structuur of logische ordening erin"}],
         correct:'a', explanation:'Het boek noemt dit expliciet als algemene valkuil om te vermijden.'},
       {id:'h4q23', topic:'Stappenplan: visuele weergave', bloom:'begrijpen',
         q:'Welke drie vragen gebruikt het boek als toetsvraag om te beoordelen of een bedrijfsprocesmodel voldoet?',
-        options:[{id:'a',text:'Of het model past binnen één A4\'tje en gebruikmaakt van minstens tien kleuren'},{id:'b',text:'Of het een helder beeld geeft van de te creëren toegevoegde waarde, hoe activiteiten in samenhang zijn geordend, en wat per proces cruciaal is voor het onderscheidend vermogen'},{id:'c',text:'Of het model is goedgekeurd door de accountant en de ICT-afdeling'}],
+        options:[{id:'a',text:"Of het model past binnen één A4'tje en gebruikmaakt van minstens tien verschillende kleuren in de plaat"},{id:'b',text:"Of het een helder beeld geeft van de toegevoegde waarde, hoe activiteiten zijn geordend en wat per proces cruciaal is"},{id:'c',text:"Of het model is goedgekeurd door de accountant, de ICT-afdeling en de directie van de organisatie zelf"}],
         correct:'b', explanation:'Dit zijn letterlijk de drie beoordelingsvragen die het boek noemt.'},
       {id:'h4q24', topic:"Stappenplan: visuele weergave", bloom:'begrijpen',
         q:"Wat is de bedoeling van stap 6 van het stappenplan, het samenbrengen in een visuele weergave?",
-        options:[{id:'a',text:"Alle werkprocessen uitwerken tot op het niveau van processtappen"},{id:'b',text:"Vastleggen welke medewerker welke taak uitvoert"},{id:'c',text:"De essentie van de organisatie samenbrengen in een weergave die iedereen kan begrijpen"}],
+        options:[{id:'a',text:"Alle werkprocessen uitwerken tot op het niveau van de processtappen en de werkinstructies"},{id:'b',text:"Vastleggen welke medewerker welke taak uitvoert en wie daarvoor verantwoordelijk is"},{id:'c',text:"De essentie van de organisatie samenbrengen in een weergave die iedereen kan begrijpen"}],
         correct:'c', explanation:"Stap 6 brengt de essentie samen in een visuele weergave: het mooiste is vaak één veelzeggende basisplaat die laat zien welke onderliggende waardestromen en gedeelde werkprocessen er zijn. Werkprocessen en taakverdeling horen niet in het bedrijfsprocesmodel."},
       {id:'h4q25', topic:'Valkuilen bij het opstellen', bloom:'onthouden',
         q:'Welke van de volgende is GEEN van de vier valkuilen die het boek noemt bij het opstellen van een bedrijfsprocesmodel?',
@@ -1120,19 +1128,19 @@ const CHAPTERS = [
         correct:'a', explanation:'De vier valkuilen zijn: analyse vanuit één discipline, bedrijfsfuncties in plaats van bedrijfsprocessen, te generiek maken, en te gedetailleerd maken — snelheid van opstellen staat er niet bij.'},
       {id:'h4q26', topic:'Valkuilen bij het opstellen', bloom:'begrijpen',
         q:'Wat is het verschil tussen bedrijfsfuncties en bedrijfsprocessen, zoals toegelicht bij valkuil 2?',
-        options:[{id:'a',text:'Bedrijfsfuncties en bedrijfsprocessen zijn in het boek volledig inwisselbare begrippen'},{id:'b',text:'Bedrijfsfuncties ordenen activiteiten naar specialisme, terwijl bedrijfsprocessen worden afgebakend op basis van toegevoegde waarde'},{id:'c',text:'Bedrijfsfuncties bestaan alleen bij non-profitorganisaties'}],
+        options:[{id:'a',text:"Bedrijfsfuncties en bedrijfsprocessen zijn in het boek volledig inwisselbare begrippen van gelijke betekenis"},{id:'b',text:"Bedrijfsfuncties ordenen activiteiten naar specialisme; bedrijfsprocessen worden afgebakend op toegevoegde waarde"},{id:'c',text:"Bedrijfsfuncties bestaan alleen bij non-profitorganisaties, terwijl bedrijfsprocessen alleen bij commerciële bedrijven bestaan"}],
         correct:'b', explanation:'Dit is letterlijk het onderscheid dat het boek maakt bij valkuil 2.'},
       {id:'h4q27', topic:'Valkuilen bij het opstellen', bloom:'toepassen',
         q:'Een bedrijfsprocesmodel wordt zo abstract en generiek geformuleerd dat het model evengoed voor elke andere organisatie in dezelfde branche zou kunnen gelden. In welke valkuil is deze organisatie getrapt?',
-        options:[{id:'a',text:'Valkuil 1: analyse vanuit één discipline'},{id:'b',text:'Valkuil 4: het bedrijfsprocesmodel te gedetailleerd maken'},{id:'c',text:'Valkuil 3: het bedrijfsprocesmodel zo generiek maken dat de aard van de organisatie niet naar voren komt'}],
+        options:[{id:'a',text:"Valkuil 1: de analyse vanuit één discipline uitvoeren, bijvoorbeeld alleen vanuit de ICT-afdeling"},{id:'b',text:"Valkuil 4: het bedrijfsprocesmodel te gedetailleerd maken, tot op het niveau van werkprocessen"},{id:'c',text:"Valkuil 3: het model zo generiek maken dat de aard van de organisatie niet naar voren komt"}],
         correct:'c', explanation:'Dit is letterlijk valkuil 3 zoals het boek die beschrijft.'},
       {id:'h4q28', topic:"Stappenplan: visuele weergave", bloom:'begrijpen',
         q:"Hoe moet het stappenplan voor het opstellen van een bedrijfsprocesmodel volgens het boek worden toegepast?",
-        options:[{id:'a',text:"Flexibel, als leidraad, want rigide hanteren werkt averechts"},{id:'b',text:"Rigide, stap voor stap zonder af te wijken"},{id:'c',text:"Alleen de eerste drie stappen zijn verplicht"}],
+        options:[{id:'a',text:"Flexibel, als leidraad, want rigide hanteren werkt averechts"},{id:'b',text:"Rigide, stap voor stap en zonder af te wijken van de volgorde"},{id:'c',text:"Alleen de eerste drie stappen zijn verplicht om te doorlopen"}],
         correct:'a', explanation:"Het opstellen van een bedrijfsprocesmodel is geen puur analytisch proces. Het stappenplan is een leidraad die flexibel moet worden toegepast, want rigide hanteren werkt averechts."},
       {id:'h4q29', topic:'Conclusie hoofdstuk', bloom:'begrijpen',
         q:'Waarom stelt het boek dat het opstellen van een bedrijfsprocesmodel "raakt aan de cultuur" van de organisatie?',
-        options:[{id:'a',text:'Omdat cultuur in het boek wordt gedefinieerd als synoniem voor bedrijfsprocesmodel'},{id:'b',text:'Omdat bij het opstellen van een bedrijfsprocesmodel verschillende beelden en termen naar boven komen die mensen van de organisatie hebben, en die heel eigen zijn aan de organisatie'},{id:'c',text:'Omdat een bedrijfsprocesmodel altijd in een cultuurprogramma moet worden opgenomen'}],
+        options:[{id:'a',text:"Omdat cultuur in het boek wordt gedefinieerd als een synoniem voor het bedrijfsprocesmodel zelf en niets anders"},{id:'b',text:"Omdat er verschillende, eigen beelden en termen van mensen in de organisatie naar boven komen bij het opstellen"},{id:'c',text:"Omdat een bedrijfsprocesmodel altijd in een cultuurprogramma moet worden opgenomen en getoetst door de top"}],
         correct:'b', explanation:'Dit is letterlijk de reden die het boek geeft aan het eind van het hoofdstuk, als opstap naar het hoofdstuk over organisatiecultuur.'},
       {id:'h4q30', topic:"Opstellen als onderdeel van strategieontwikkeling", bloom:'begrijpen',
         q:"Wat is volgens het boek een bijproduct van het opstellen van een bedrijfsprocesmodel?",
@@ -1199,15 +1207,15 @@ const CHAPTERS = [
     questions: [
       {id:'h6q1', topic:'Ontstaan en betekenis van architectuur', bloom:'onthouden',
         q:'Vanuit welk vakgebied is de term "architectuur" in de context van organisaties oorspronkelijk afkomstig, volgens het boek?',
-        options:[{id:'a',text:'Informatiemanagement (de term is overgenomen uit de bouwwereld binnen dit vakgebied)'},{id:'b',text:'Uitsluitend de juridische afdeling van organisaties'},{id:'c',text:'De marketingdiscipline'}],
+        options:[{id:'a',text:"Informatiemanagement, waar de term is overgenomen uit de bouwwereld"},{id:'b',text:"Juridische zaken, waar de term uit het contractrecht afkomstig is"},{id:'c',text:"Marketing, waar de term uit de merkstrategie is overgenomen"}],
         correct:'a', explanation:'Het boek noemt letterlijk dat het gebruik van de term "architectuur" zijn oorsprong vindt in het vakgebied informatiemanagement.'},
       {id:'h6q2', topic:'Ontstaan en betekenis van architectuur', bloom:'begrijpen',
         q:'Wat is volgens het boek het belangrijkste verschil tussen een functionele en een procesmatige ordening van processen?',
-        options:[{id:'a',text:'Een functionele ordening bestaat uitsluitend bij non-profitorganisaties'},{id:'b',text:'Bij een functionele ordening wordt gekeken naar waar hetzelfde werk wordt gedaan, terwijl bij een procesgerichte benadering eerst wordt gekeken naar de eisen die de klant aan het proces stelt'},{id:'c',text:'Een procesmatige ordening houdt nooit rekening met klanten'}],
+        options:[{id:'a',text:"Functioneel kijkt naar de wensen van de klant; procesgericht naar waar hetzelfde werk gebeurt"},{id:'b',text:"Functioneel kijkt naar waar hetzelfde werk gebeurt; procesgericht eerst naar de klanteisen"},{id:'c',text:"Functioneel is bedoeld voor commerciële, procesgericht voor publieke organisaties alleen"}],
         correct:'b', explanation:'Dit is precies het onderscheid dat het kader "Functionele versus procesmatige ordening van processen" maakt.'},
       {id:'h6q3', topic:'Ontstaan en betekenis van architectuur', bloom:'toepassen',
         q:'Een organisatie maakt voor zowel zakelijke als particuliere klanten facturen en besluit op basis daarvan één proces "facturering" te benoemen, zonder te kijken naar verschillen in klantbehoefte. Past dit bij een functionele of een procesgerichte benadering, volgens het kader in het boek?',
-        options:[{id:'a',text:'Een procesgerichte benadering, want facturering gaat altijd over geld'},{id:'b',text:'Geen van beide, want facturering valt buiten elke ordeningsvorm'},{id:'c',text:'Een functionele benadering, want de redenering is dat hetzelfde soort werk (facturering) op één plek georganiseerd moet worden, ongeacht de verschillen in klanteisen'}],
+        options:[{id:'a',text:"Procesgericht: de klanteisen van zakelijke en particuliere klanten bepalen de procesindeling"},{id:'b',text:"Geen van beide: het is een ICT-keuze die los staat van de ordening van processen"},{id:'c',text:"Functioneel: hetzelfde soort werk (facturering) wordt op één plek georganiseerd, ongeacht klanteisen"}],
         correct:'c', explanation:'Dit is letterlijk het voorbeeld dat het boek geeft bij de functionele ordening.'},
       {id:'h6q4', topic:'Waarom een procesarchitectuur', bloom:'onthouden',
         q:'Welke van de volgende is GEEN van de doelen die het boek noemt waarvoor je een procesarchitectuur kunt gebruiken?',
@@ -1215,27 +1223,27 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt drie doelen (ideaalplaatje, samenhang bewaken, snel inzicht in consequenties) — automatische winstgroei staat er niet bij.'},
       {id:'h6q5', topic:'Waarom een procesarchitectuur', bloom:'begrijpen',
         q:'Waarom heeft een procesarchitectuur volgens het boek een "speciale functie" ten opzichte van andere architecturen?',
-        options:[{id:'a',text:'Omdat een procesarchitectuur als enige architectuur nooit hoeft te worden bijgewerkt'},{id:'b',text:'Omdat ze niet alleen de samenhang tussen processen bewaakt, maar ook een eenduidige kapstok biedt voor alle aandachtsgebieden waarbij processen een rol spelen, zoals AO, kwaliteitszorg, regelgeving, HR en informatiesystemen'},{id:'c',text:'Omdat een procesarchitectuur uitsluitend door de ICT-afdeling gebruikt mag worden'}],
+        options:[{id:'a',text:"Ze vervangt het bedrijfsprocesmodel en vormt als enige architectuur de basis voor de ICT-infrastructuur van de organisatie"},{id:'b',text:"Ze bewaakt de samenhang tussen processen en is een kapstok voor AO, kwaliteitszorg, regelgeving, HR en informatiesystemen"},{id:'c',text:"Ze legt de organisatiestructuur vast en bepaalt daarmee de functies, salarisschalen en hiërarchie van medewerkers"}],
         correct:'b', explanation:'Dit is letterlijk de speciale functie die het boek aan de procesarchitectuur toekent.'},
       {id:'h6q6', topic:'Waarom een procesarchitectuur', bloom:'toepassen',
         q:'Een organisatie wil snel kunnen overzien welke processen worden geraakt door een nieuwe wet, zonder alle procesbeschrijvingen één voor één te hoeven doorzoeken. Welk doel van een procesarchitectuur wordt hier ingezet?',
-        options:[{id:'a',text:'Het vervangen van de accountantscontrole'},{id:'b',text:'Het garanderen van winstgroei'},{id:'c',text:'Snel inzicht geven in de consequenties van veranderingen'}],
+        options:[{id:'a',text:"Het vervangen van de accountantscontrole door automatische toetsing"},{id:'b',text:"Het garanderen van winstgroei door kostenbesparing op processen"},{id:'c',text:"Snel inzicht geven in de consequenties van veranderingen voor processen"}],
         correct:'c', explanation:'Dit is letterlijk het derde doel dat het boek noemt: snel inzicht in de consequenties van bijvoorbeeld een wetswijziging.'},
       {id:'h6q7', topic:'Eisen aan een goede procesarchitectuur', bloom:'onthouden',
         q:'Wat is, volgens het boek, niet het eerste doel van een procesarchitectuur, in tegenstelling tot het bedrijfsprocesmodel?',
-        options:[{id:'a',text:'Het verhelderen van een visie — dat is juist het doel van het bedrijfsprocesmodel; de procesarchitectuur gaat om het maken van keuzes op basis van die visie'},{id:'b',text:'Het bieden van een kapstok voor procesbeschrijvingen'},{id:'c',text:'Het geven van houvast bij het ontwerpen van processen op lagere niveaus'}],
+        options:[{id:'a',text:"Het verhelderen van een visie, want dat is het doel van het bedrijfsprocesmodel"},{id:'b',text:"Het bieden van een kapstok voor de procesbeschrijvingen op alle niveaus van het model"},{id:'c',text:"Het geven van houvast bij het ontwerpen van processen op de lagere niveaus"}],
         correct:'a', explanation:'Het boek stelt expliciet dat het bedrijfsprocesmodel bedoeld is om een visie te verhelderen, terwijl de procesarchitectuur dient om keuzes te maken op basis van die visie.'},
       {id:'h6q8', topic:'Eisen aan een goede procesarchitectuur', bloom:'begrijpen',
         q:'Waarom moet de uitwerking van een procesarchitectuur volgens het boek zo min mogelijk ruimte laten voor interpretaties?',
-        options:[{id:'a',text:'Omdat interpretaties wettelijk verboden zijn in Nederlandse organisaties'},{id:'b',text:'Omdat ontwerpeisen bij een procesarchitectuur veel belangrijker zijn dan bij het bedrijfsprocesmodel, dat juist bedoeld is om een visie te verhelderen'},{id:'c',text:'Omdat een procesarchitectuur nooit tekst mag bevatten, alleen plaatjes'}],
+        options:[{id:'a',text:"Omdat de procesarchitectuur dient om de visie te verhelderen, waarvoor open formuleringen juist nodig zijn"},{id:'b',text:"Omdat ontwerpeisen bij een procesarchitectuur belangrijker zijn dan bij het bedrijfsprocesmodel, dat een visie verheldert"},{id:'c',text:"Omdat het bedrijfsprocesmodel hierop voortbouwt en daarom alleen globale beschrijvingen van processen bevat"}],
         correct:'b', explanation:'Het boek noemt letterlijk dat ontwerpeisen bij de procesarchitectuur belangrijker zijn, met als gevolg dat interpretatieruimte minimaal moet zijn.'},
       {id:'h6q9', topic:'Eisen aan een goede procesarchitectuur', bloom:'toepassen',
         q:'Een organisatie stelt een kernwaarde vast als "openheid en transparantie", en legt vast dat regels die van toepassing zijn op een proces altijd zichtbaar moeten zijn voor de medewerkers die het proces uitvoeren. Wat illustreert dit?',
-        options:[{id:'a',text:'Dat kernwaarden nooit in een procesarchitectuur mogen voorkomen'},{id:'b',text:'Dat elke organisatie exact dezelfde procesarchitectuur moet hanteren'},{id:'c',text:'Dat principes en waarden die belangrijk zijn voor de organisatie (zoals verwoord in een missie of kernwaarden) direct of indirect sturend moeten zijn voor de uitwerking van de procesarchitectuur'}],
+        options:[{id:'a',text:"Dat kernwaarden uitsluitend in de jaarrekening thuishoren en nooit invloed hebben op de inrichting van processen"},{id:'b',text:"Dat kernwaarden alleen gelden voor de marketingafdeling en niet doorwerken in het procesontwerp van de architectuur"},{id:'c',text:"Dat principes en waarden van de organisatie, zoals kernwaarden, sturend moeten zijn voor de procesarchitectuur"}],
         correct:'c', explanation:'Dit is letterlijk het voorbeeld dat het boek geeft bij hoe kernwaarden direct sturend kunnen zijn voor de procesarchitectuur.'},
       {id:'h6q10', topic:'Vijf onderdelen van een procesarchitectuur', bloom:'onthouden',
         q:'Welke vijf onderdelen onderscheidt het boek in een procesarchitectuur (figuur 6.1)?',
-        options:[{id:'a',text:'Uitgangspunten voor procesmanagement, standaarden en eisen aan procesmodellering, ontwerpprincipes, beschrijving van bedrijfs- en werkprocessen, en inrichtingsprincipes'},{id:'b',text:'Strategie, cultuur, organisatie, besturing en ICT'},{id:'c',text:'Keten, organisatie, organisatieonderdeel, uitvoering en handeling'}],
+        options:[{id:'a',text:"Uitgangspunten voor procesmanagement, eisen aan procesmodellering, ontwerpprincipes, beschrijving van processen en inrichtingsprincipes"},{id:'b',text:"Strategie, cultuur, organisatie, besturing en ICT, met per onderdeel eigen eisen en principes"},{id:'c',text:"Keten, organisatie, organisatieonderdeel, uitvoering en handeling, elk met een eigen eigenaar en verantwoordelijke"}],
         correct:'a', explanation:'Dit zijn letterlijk de vijf onderdelen die figuur 6.1 toont.'},
       {id:'h6q11', topic:'Vijf onderdelen van een procesarchitectuur', bloom:'begrijpen',
         q:'Hoe verhouden de vijf onderdelen van een procesarchitectuur zich tot de stappen om er een uit te werken?',
@@ -1247,23 +1255,23 @@ const CHAPTERS = [
         correct:'c', explanation:'Inrichtingsprincipes vormen letterlijk het vijfde onderdeel/de vijfde stap.'},
       {id:'h6q13', topic:'Stap 1 en 2: uitgangspunten en modelleerprincipes', bloom:'onthouden',
         q:'Waarover gaan de "uitgangspunten voor procesmanagement" (stap 1) in een procesarchitectuur?',
-        options:[{id:'a',text:'Verantwoordelijkheden rond processen (zoals proceseigenaarschap) en de wijze waarop procesverbetering wordt vormgegeven'},{id:'b',text:'Uitsluitend de kleur en vormgeving van procesplaten'},{id:'c',text:'De exacte salarissen van proceseigenaren'}],
+        options:[{id:'a',text:"Verantwoordelijkheden rond processen, zoals proceseigenaarschap, en de wijze waarop procesverbetering wordt vormgegeven"},{id:'b',text:"De vormgeving van procesplaten, zoals kleurgebruik, lettertype en de keuze voor vaste symbolen per proces"},{id:'c',text:"De hoogte van beloningen, zoals salarissen en bonussen van proceseigenaren, en de manier van functiewaardering"}],
         correct:'a', explanation:'Dit zijn letterlijk de onderwerpen die het boek noemt bij stap 1.'},
       {id:'h6q14', topic:'Stap 1 en 2: uitgangspunten en modelleerprincipes', bloom:'begrijpen',
         q:'Wat is het verschil tussen modelleerprincipes (stap 2) en ontwerpprincipes (stap 3), zoals toegelicht in het kader "Verschil tussen \'ontwerpen\' en \'modelleren\'"?',
-        options:[{id:'a',text:'Modelleerprincipes en ontwerpprincipes zijn in het boek exact dezelfde term'},{id:'b',text:'Modelleerprincipes gaan over de wijze van vastleggen van processen (bijvoorbeeld welke methoden en tot op welk niveau), terwijl ontwerpprincipes de inhoudelijke uitgangspunten zijn voor het ontwerpen en uitwerken van processen'},{id:'c',text:'Ontwerpprincipes gaan alleen over kleurgebruik in procesplaten'}],
+        options:[{id:'a',text:"Modelleerprincipes bepalen de inhoud van processen; ontwerpprincipes bepalen met welke notatie ze worden vastgelegd"},{id:'b',text:"Modelleren gaat over de wijze van vastleggen van processen; ontwerpen over de inhoudelijke uitgangspunten voor de uitwerking"},{id:'c',text:"Ontwerpprincipes gaan over kleurgebruik en lay-out, modelleerprincipes over de technische systemen die worden gebruikt"}],
         correct:'b', explanation:'Dit is precies het onderscheid dat het boek maakt in het betreffende kader.'},
       {id:'h6q15', topic:'Stap 1 en 2: uitgangspunten en modelleerprincipes', bloom:'toepassen',
         q:'Een procesarchitectuur legt vast dat procesbeschrijvingen moeten voldoen aan de open standaardnotatie "high-level BPMN", en dat elk proces een eenduidig gedefinieerde output moet hebben. Bij welke stap van het uitwerken van een procesarchitectuur hoort dit?',
-        options:[{id:'a',text:'Stap 1: vaststellen van uitgangspunten voor procesmanagement'},{id:'b',text:'Stap 4: uitwerken van bedrijfs- en werkprocessen'},{id:'c',text:'Stap 2: vaststellen van uitgangspunten voor vastlegging (modelleerprincipes)'}],
+        options:[{id:'a',text:"Stap 1: vaststellen van uitgangspunten voor procesmanagement en eigenaarschap"},{id:'b',text:"Stap 4: uitwerken van bedrijfs- en werkprocessen en hun procesflows"},{id:'c',text:"Stap 2: vaststellen van uitgangspunten voor vastlegging (modelleerprincipes)"}],
         correct:'c', explanation:'Notatiestandaarden en eisen aan eenduidige output zijn letterlijk voorbeelden die het boek bij modelleerprincipes (stap 2) noemt.'},
       {id:'h6q16', topic:'Stap 3: ontwerpprincipes', bloom:'onthouden',
         q:'Wat zijn ontwerpprincipes, zoals het boek die in stap 3 definieert?',
-        options:[{id:'a',text:'De inhoudelijke uitgangspunten die worden gehanteerd bij het ontwerpen en uitwerken van bedrijfs- en werkprocessen, afgeleid van de strategie van de organisatie'},{id:'b',text:'Uitsluitend technische specificaties voor de te gebruiken software'},{id:'c',text:'De namen van de proceseigenaren per bedrijfsproces'}],
+        options:[{id:'a',text:"De inhoudelijke uitgangspunten voor het ontwerpen en uitwerken van bedrijfs- en werkprocessen, afgeleid van de strategie"},{id:'b',text:"De technische uitgangspunten voor het selecteren en inrichten van software, afgeleid van de ICT-strategie van de organisatie"},{id:'c',text:"De afspraken over namen en verantwoordelijkheden van proceseigenaren, afgeleid van de organisatiestructuur van de organisatie"}],
         correct:'a', explanation:'Dit is letterlijk de definitie van ontwerpprincipes uit het boek.'},
       {id:'h6q17', topic:'Stap 3: ontwerpprincipes', bloom:'begrijpen',
         q:'Waarom is het bij het formuleren van ontwerpprincipes volgens het boek belangrijk om vast te stellen hoe wordt omgegaan met onverwachte afwijkingen en hoe de regie over het procesverloop wordt geregeld?',
-        options:[{id:'a',text:'Omdat afwijkingen volgens het boek nooit mogen voorkomen in een goed ontworpen proces'},{id:'b',text:'Omdat ontwerpprincipes antwoord moeten geven op dit soort vragen, zodat er bij het inrichten van processen concrete procesflows mee kunnen worden uitgewerkt'},{id:'c',text:'Omdat dit uitsluitend een juridische verplichting is zonder praktisch nut'}],
+        options:[{id:'a',text:"Omdat afwijkingen in een goed ontworpen proces nooit voorkomen en dus buiten de ontwerpprincipes worden gehouden"},{id:'b',text:"Omdat ontwerpprincipes hierop antwoord moeten geven, zodat daarmee concrete procesflows kunnen worden uitgewerkt"},{id:'c',text:"Omdat dit uitsluitend een wettelijke verplichting is die los staat van het ontwerpen en uitwerken van processen"}],
         correct:'b', explanation:'Het boek noemt deze vragen letterlijk als onderdeel van het formuleren van ontwerpprincipes, met het oog op het later uitwerken van procesflows.'},
       {id:'h6q18', topic:'Stap 3: ontwerpprincipes', bloom:'toepassen',
         q:'Een procesarchitectuur legt vast dat binnen klant-tot-klantprocessen een expliciet onderscheid wordt gemaakt tussen werkprocessen met klantinteractie (frontoffice) en zonder klantinteractie (backoffice), omdat deze een andere dynamiek en andere competenties vereisen. Is dit een voorbeeld van een ontwerpprincipe?',
@@ -1271,51 +1279,51 @@ const CHAPTERS = [
         correct:'c', explanation:'Dit staat letterlijk als voorbeeld van een ontwerpprincipe in het kader van het boek.'},
       {id:'h6q19', topic:'Stap 4: bedrijfs- en werkprocessen uitwerken', bloom:'onthouden',
         q:'Wat betekent het dat de beschrijvingen van bedrijfs- en werkprocessen binnen een procesarchitectuur "inrichtingsonafhankelijk" moeten zijn (stap 4)?',
-        options:[{id:'a',text:'Dat uit de beschrijving niet is op te maken door wie (welke afdeling/functionaris) en met welk systeem de processen worden uitgevoerd, en dat de beschrijving niet verandert als dat wijzigt'},{id:'b',text:'Dat de beschrijving nooit door een specifieke afdeling gemaakt mag worden'},{id:'c',text:'Dat de beschrijving alleen in de Engelse taal opgesteld mag worden'}],
+        options:[{id:'a',text:"Dat uit de beschrijving niet blijkt wie (welke afdeling) en met welk systeem de processen worden uitgevoerd"},{id:'b',text:"Dat de beschrijving onafhankelijk is van de strategie en daarom nooit hoeft te worden bijgesteld"},{id:'c',text:"Dat de beschrijving geldt voor één specifieke afdeling en alleen verandert wanneer het systeem wijzigt"}],
         correct:'a', explanation:'Dit is letterlijk de definitie van inrichtingsonafhankelijk uit het boek.'},
       {id:'h6q20', topic:'Stap 4: bedrijfs- en werkprocessen uitwerken', bloom:'begrijpen',
         q:'Waarom is de typering van werkprocessen (bijvoorbeeld naar aard en frequentie, mate van automatisering, gewenste doorlooptijd) volgens het boek belangrijk?',
-        options:[{id:'a',text:'Omdat typeringen uitsluitend bedoeld zijn voor de jaarlijkse audit'},{id:'b',text:'Omdat deze typering helpt bij het inrichten van adequate besturing en bij het richting geven aan verandering, en kan verschillen per werkproces'},{id:'c',text:'Omdat typering van werkprocessen de enige manier is om de omzet te berekenen'}],
+        options:[{id:'a',text:"Omdat typering bepaalt welke werkprocessen buiten de architectuur vallen, en voor alle werkprocessen gelijk moet zijn"},{id:'b',text:"Omdat typering helpt bij het inrichten van adequate besturing en het richting geven aan verandering, en per werkproces kan verschillen"},{id:'c',text:"Omdat typering uitsluitend dient om de omvang van afdelingen te bepalen en daarmee de budgetverdeling te regelen"}],
         correct:'b', explanation:'Het boek noemt expliciet dat deze typering speelt bij het inrichten van adequate besturing en richting geeft aan verandering.'},
       {id:'h6q21', topic:'Stap 4: bedrijfs- en werkprocessen uitwerken', bloom:'toepassen',
         q:'Bij het "beoordelen van uitkeringsrecht" blijkt dat voor de ene verklaring vijf juristen betrokken moeten worden, terwijl voor een andere verklaring alleen administratieve handelingen nodig zijn, met dus een andere besturing. Wat concludeert het boek in dit voorbeeld?',
-        options:[{id:'a',text:'Dat dit altijd als één en hetzelfde werkproces moet worden beschouwd omdat de naam gelijk is'},{id:'b',text:'Dat juristen nooit bij werkprocessen betrokken mogen worden'},{id:'c',text:'Dat er, ondanks dezelfde naam, sprake is van twee aparte werkprocessen, omdat de besturing van beide processen verschillend is'}],
+        options:[{id:'a',text:"Eén werkproces, omdat de naam gelijk is en juristen in beide gevallen de beoordeling uitvoeren"},{id:'b',text:"Eén werkproces, omdat het verschil alleen de uitvoering betreft en niets zegt over de besturing"},{id:'c',text:"Twee aparte werkprocessen ondanks dezelfde naam, omdat de besturing van beide verschillend is"}],
         correct:'c', explanation:'Dit is letterlijk de conclusie van "Voorbeeld 1" in het boek over dit onderwerp.'},
       {id:'h6q22', topic:'Stap 5: inrichtingsprincipes en procesdomeinen', bloom:'onthouden',
         q:'Waarover gaan inrichtingsprincipes (stap 5) van een procesarchitectuur?',
-        options:[{id:'a',text:'Over het "hoe" van processen, bijvoorbeeld de mate van automatisering of de beoogde klantervaring, als kader voor de verdere inrichting'},{id:'b',text:'Uitsluitend over de juridische aansprakelijkheid van de organisatie'},{id:'c',text:'Over de exacte openingstijden van alle vestigingen'}],
+        options:[{id:'a',text:"Het hoe van processen, zoals de mate van automatisering of de beoogde klantervaring, als kader voor de inrichting"},{id:'b',text:"De juridische vorm van de organisatie, zoals de rechtsvorm en de aansprakelijkheid van bestuurders voor processen"},{id:'c',text:"De fysieke locaties van de organisatie, zoals de openingstijden en spreiding van de vestigingen"}],
         correct:'a', explanation:'Dit is letterlijk waar inrichtingsprincipes volgens het boek over gaan.'},
       {id:'h6q23', topic:'Stap 5: inrichtingsprincipes en procesdomeinen', bloom:'begrijpen',
         q:'Waarom is het volgens het boek handig om gelijksoortige werkprocessen eerst te clusteren tot "procesdomeinen" voordat inrichtingsprincipes worden geformuleerd?',
-        options:[{id:'a',text:'Omdat procesdomeinen wettelijk verplicht zijn voor elke organisatie'},{id:'b',text:'Omdat clusteren in procesdomeinen de enige manier is om processen te automatiseren'},{id:'c',text:'Omdat inrichtingsprincipes kunnen afhangen van de typering van werkprocessen, en processen binnen hetzelfde procesdomein vaak dezelfde dynamiek en dezelfde KSF\'s kennen'}],
+        options:[{id:'a',text:"Omdat procesdomeinen per wet zijn voorgeschreven en elk domein daarom een eigen proceseigenaar moet hebben"},{id:'b',text:"Omdat clusteren de enige manier is om processen te automatiseren, waarna inrichtingsprincipes vanzelf volgen"},{id:'c',text:"Omdat inrichtingsprincipes kunnen afhangen van de typering, en processen in één domein dezelfde dynamiek en KSF's kennen"}],
         correct:'c', explanation:'Het boek noemt dit expliciet als reden om eerst te clusteren tot procesdomeinen.'},
       {id:'h6q24', topic:'Stap 5: inrichtingsprincipes en procesdomeinen', bloom:'toepassen',
         q:'Een procesarchitectuur bepaalt voor het procesdomein "administratieve processen" maximale automatisering zonder menselijke tussenkomst, terwijl voor "klantinteractieprocessen" juist wordt vastgelegd dat klanten persoonlijk benaderd en gevolgd worden. Wat illustreert dit verschil?',
-        options:[{id:'a',text:'Dat één procesdomein altijd voorrang krijgt boven het andere'},{id:'b',text:'Dat inrichtingsprincipes nooit mogen verschillen binnen dezelfde organisatie'},{id:'c',text:'Dat inrichtingsprincipes per procesdomein kunnen verschillen, afhankelijk van de aard en de KSF\'s van de processen in dat domein'}],
+        options:[{id:'a',text:"Dat het ene procesdomein altijd voorrang krijgt boven het andere, omdat automatisering zwaarder weegt"},{id:'b',text:"Dat inrichtingsprincipes binnen één organisatie altijd gelijk moeten zijn, ongeacht de aard van processen"},{id:'c',text:"Dat inrichtingsprincipes per procesdomein kunnen verschillen, afhankelijk van de aard en de KSF's van de processen"}],
         correct:'c', explanation:'Dit sluit aan bij hoe het boek dit verschil tussen de procesdomeinen toelicht aan de hand van voorbeelden.'},
       {id:'h6q25', topic:'Referentiemodellen en informatiearchitectuur', bloom:'onthouden',
         q:'Wat is een referentiemodel (of Business Process Framework), zoals besproken in het boek?',
-        options:[{id:'a',text:'Een kant-en-klaar procesmodel, vaak branche- of domeingericht (zoals eTOM, SCOR, ITIL), dat als basis kan dienen in plaats van zelf het wiel opnieuw uit te vinden'},{id:'b',text:'Een model dat uitsluitend door de Nederlandse overheid gebruikt mag worden'},{id:'c',text:'Een synoniem voor het bedrijfsprocesmodel, exact hetzelfde begrip'}],
+        options:[{id:'a',text:"Een kant-en-klaar, vaak branchegericht procesmodel (zoals eTOM, SCOR, ITIL) dat als basis kan dienen"},{id:'b',text:"Een model dat de bestaande processen van één organisatie beschrijft en alleen intern wordt gebruikt"},{id:'c',text:"Een ander woord voor het bedrijfsprocesmodel, dat de visie van de organisatie tot uitdrukking brengt"}],
         correct:'a', explanation:'Dit is letterlijk hoe het boek referentiemodellen en Business Process Frameworks introduceert, met voorbeelden als eTOM, SCOR en ITIL.'},
       {id:'h6q26', topic:'Referentiemodellen en informatiearchitectuur', bloom:'begrijpen',
         q:'Waarom waarschuwt het boek ervoor om referentiemodellen klakkeloos over te nemen, met name voor de onderdelen waarin de organisatie zich juist wil onderscheiden?',
-        options:[{id:'a',text:'Omdat referentiemodellen altijd duurder zijn dan zelf processen ontwerpen'},{id:'b',text:'Omdat het bedrijfsprocesmodel juist bedoeld is om de eigen visie tot uitdrukking te brengen, en referentiemodellen niet altijd gebaseerd zijn op dezelfde definities als in dit boek'},{id:'c',text:'Omdat referentiemodellen wettelijk verboden zijn in de BPM-wereld'}],
+        options:[{id:'a',text:"Omdat referentiemodellen alleen bedoeld zijn voor ICT-processen en daarom niet passen bij de primaire processen"},{id:'b',text:"Omdat het bedrijfsprocesmodel de eigen visie moet uitdrukken en referentiemodellen andere definities hanteren"},{id:'c',text:"Omdat referentiemodellen verouderd zijn en niet meer worden bijgewerkt door de leveranciers ervan"}],
         correct:'b', explanation:'Het boek noemt beide punten expliciet als reden voor voorzichtigheid met referentiemodellen.'},
       {id:'h6q27', topic:"Referentiemodellen en informatiearchitectuur", bloom:'begrijpen',
         q:"Waarin verschilt de blik van een procesarchitect van die van een informatiearchitect?",
-        options:[{id:'a',text:"De informatiearchitect kijkt vanuit het klantresultaat, de procesarchitect vanuit informatie"},{id:'b',text:"Beide kijken op exact dezelfde manier naar processen"},{id:'c',text:"De procesarchitect kijkt vanuit het klantresultaat, de informatiearchitect vanuit de informatievoorziening"}],
+        options:[{id:'a',text:"De informatiearchitect kijkt vanuit het klantresultaat, de procesarchitect vanuit de informatievoorziening"},{id:'b',text:"De procesarchitect kijkt vanuit de organisatiestructuur, de informatiearchitect vanuit het klantresultaat"},{id:'c',text:"De procesarchitect kijkt vanuit het klantresultaat, de informatiearchitect vanuit de informatievoorziening"}],
         correct:'c', explanation:"Een procesarchitect kijkt vanuit het klantresultaat (toegevoegde waarde), een informatiearchitect vanuit de informatievoorziening. Daarom voldoen procesmodellen binnen een informatiearchitectuur meestal niet aan de eisen voor procesgericht organiseren."},
       {id:'h6q28', topic:"Stap 4: bedrijfs- en werkprocessen uitwerken", bloom:'onthouden',
         q:"Welke drie soorten processtappen onderscheidt het boek naar de wijze van uitvoering?",
-        options:[{id:'a',text:"Volledig geautomatiseerd, door mensen uitgevoerd met systeemondersteuning, en volledig handmatig"},{id:'b',text:"Primair, besturend en facilitair"},{id:'c',text:"Standaard, maatwerk en projectmatig"}],
+        options:[{id:'a',text:"Volledig geautomatiseerd, door mensen uitgevoerd met systeemondersteuning, en volledig handmatig"},{id:'b',text:"Primair, besturend en facilitair, ingedeeld naar hun bijdrage aan de waardeketen van de organisatie"},{id:'c',text:"Standaard, maatwerk en projectmatig, ingedeeld naar de mate van herhaling van de uitvoering"}],
         correct:'a', explanation:"Het boek onderscheidt volledig geautomatiseerde stappen (unattended), door een mens uitgevoerde en door systemen ondersteunde stappen (attended) en volledig handmatige stappen. Een processtap is een cluster samenhangende handelingen dat tot een betekenisvol tussenresultaat leidt."},
       {id:'h6q29', topic:"Ontstaan en betekenis van architectuur", bloom:'onthouden',
         q:"Hoe luidt de TOGAF-definitie van bedrijfsarchitectuur, zoals het boek die noemt?",
-        options:[{id:'a',text:"Een overzicht van alle ICT-systemen en hun onderlinge koppelingen"},{id:'b',text:"De fundamentele opbouw van een organisatie: componenten, onderlinge relaties en principes voor ontwerp en evolutie"},{id:'c',text:"De verzameling van alle procesbeschrijvingen van een organisatie"}],
+        options:[{id:'a',text:"Een overzicht van alle ICT-systemen van een organisatie, hun koppelingen en de principes voor beheer"},{id:'b',text:"De fundamentele opbouw van een organisatie: componenten, onderlinge relaties en principes voor ontwerp en evolutie"},{id:'c',text:"De verzameling van alle procesbeschrijvingen van een organisatie, met hun eigenaren en onderlinge volgorde"}],
         correct:'b', explanation:"Volgens de TOGAF-definitie is bedrijfsarchitectuur de fundamentele opbouw van een organisatie, bestaande uit (1) haar componenten, (2) hun onderlinge relaties en die tot hun omgeving, en (3) de principes voor hun ontwerp en evolutie."},
       {id:'h6q30', topic:'Conclusie hoofdstuk', bloom:'toepassen',
         q:'In de conclusie stelt het boek dat de procesarchitectuur, samen met het bedrijfsprocesmodel en inzicht in de gewenste cultuur, de "processenkapstok" vormt — de basis voor inrichtingskeuzes. Wat volgt hieruit over de rol van de procesarchitectuur ten opzichte van het bedrijfsprocesmodel?',
-        options:[{id:'a',text:'De procesarchitectuur vervangt het bedrijfsprocesmodel volledig en maakt het overbodig'},{id:'b',text:'De procesarchitectuur en het bedrijfsprocesmodel hebben volgens het boek niets met elkaar te maken'},{id:'c',text:'De procesarchitectuur vertaalt de visie en strategie (vastgelegd in het bedrijfsprocesmodel) naar concrete kaders en eenduidige ontwerpkeuzes voor de inrichting van processen'}],
+        options:[{id:'a',text:"De procesarchitectuur vervangt het bedrijfsprocesmodel volledig, waardoor een apart model niet meer nodig is voor de inrichting"},{id:'b',text:"De procesarchitectuur staat los van het bedrijfsprocesmodel en richt zich alleen op de ICT-inrichting van processen"},{id:'c',text:"De procesarchitectuur vertaalt visie en strategie uit het bedrijfsprocesmodel naar kaders en eenduidige ontwerpkeuzes"}],
         correct:'c', explanation:'Dit is precies de relatie die de conclusie van het hoofdstuk tussen beide beschrijft.'}
     ]
   },
@@ -1405,11 +1413,11 @@ const CHAPTERS = [
     questions: [
       {id:'h7q1', topic:'Besturingsparadigma en vijf voorwaarden', bloom:'onthouden',
         q:'Wat is, volgens het besturingsparadigma van De Leeuw (1990), het "bestuurd systeem"?',
-        options:[{id:'a',text:'De organisatie, het proces of wat dan ook waaraan sturing wordt gegeven'},{id:'b',text:'Uitsluitend het besturend orgaan zelf'},{id:'c',text:'Alleen de externe omgeving van de organisatie'}],
+        options:[{id:'a',text:"De organisatie, het proces of wat dan ook waaraan sturing wordt gegeven"},{id:'b',text:"Het besturend orgaan dat informatie vergaart en sturing geeft aan het geheel"},{id:'c',text:"De externe omgeving waarmee de organisatie diensten en vragen uitwisselt"}],
         correct:'a', explanation:'Het boek definieert het bestuurd systeem letterlijk zo: de organisatie, het proces of wat dan ook waaraan sturing gegeven wordt.'},
       {id:'h7q2', topic:'Besturingsparadigma en vijf voorwaarden', bloom:'begrijpen',
         q:'Wat wordt bedoeld met een "regelkring" in het besturingsparadigma?',
-        options:[{id:'a',text:'Een vaste jaarlijkse vergadercyclus van de directie'},{id:'b',text:'Het voortdurend vergaren van informatie over de omgeving, sturing geven op basis daarvan, feedback krijgen over het effect en op basis daarvan weer bijsturen'},{id:'c',text:'Een synoniem voor het organogram van de organisatie'}],
+        options:[{id:'a',text:"Een vaste jaarlijkse vergadercyclus waarin de directie doelen en budgetten vaststelt"},{id:'b',text:"Het voortdurend vergaren van informatie, sturing geven en op basis van feedback bijsturen"},{id:'c',text:"Een synoniem voor het organogram, waarin de hiërarchische lijnen van de directie staan"}],
         correct:'b', explanation:'Dit voortdurend bijsturen op basis van verkregen informatie heet letterlijk een "regelkring" in het boek.'},
       {id:'h7q3', topic:'Besturingsparadigma en vijf voorwaarden', bloom:'toepassen',
         q:'Een besturend orgaan heeft goede informatie over de prestaties van een proces, maar geen enkele mogelijkheid om op basis daarvan iets aan te passen (geen budget, geen regels, geen bevoegdheden). Welke voorwaarde voor effectieve besturing ontbreekt hier?',
@@ -1421,7 +1429,7 @@ const CHAPTERS = [
         correct:'a', explanation:'Het boek noemt dit letterlijk "het beeld van een geldmachine".'},
       {id:'h7q5', topic:'Traditionele besturing', bloom:'begrijpen',
         q:'Waarom schiet een mechanistische, tayloriaanse procesmanagementvisie volgens het boek tekort bij dienstverlenende organisaties waarin cliënten als het ware deel uitmaken van het systeem (zoals in de zorgsector)?',
-        options:[{id:'a',text:'Omdat mechanistische visies uitsluitend toepasbaar zijn op volledig geautomatiseerde processen en daarom nooit problemen geven'},{id:'b',text:'Omdat het besturend orgaan dan geneigd is steeds meer beheersing toe te voegen in de vorm van regels, standaarden en maatregelen, tot de tegenreactie zo groot wordt dat alles weer in de kast verdwijnt'},{id:'c',text:'Omdat cliënten in de zorgsector volgens het boek geen rol spelen in processen'}],
+        options:[{id:'a',text:"Omdat mechanistische visies uitsluitend toepasbaar zijn op volledig geautomatiseerde processen en dus nooit problemen geven bij cliënten"},{id:'b',text:"Omdat het besturend orgaan steeds meer beheersing toevoegt, tot de tegenreactie zo groot wordt dat alles in de kast verdwijnt"},{id:'c',text:"Omdat cliënten in de zorgsector volgens het boek geen enkele rol spelen in processen en dus nooit gestuurd hoeven te worden"}],
         correct:'b', explanation:'Dit is letterlijk het mechanisme dat het boek beschrijft als gevolg van een mechanistische visie in dit soort organisaties.'},
       {id:'h7q6', topic:'Traditionele besturing', bloom:'toepassen',
         q:'Een organisatie kiest ervoor om naast financiële indicatoren ook te sturen op indicatoren over klanten, interne bedrijfsprocessen en het innovatie- en leervermogen, omdat financiële gegevens alleen het verleden laten zien. Welk instrument past hierbij?',
@@ -1429,23 +1437,23 @@ const CHAPTERS = [
         correct:'c', explanation:'Dit is precies hoe het boek de balanced scorecard en haar vier perspectieven introduceert.'},
       {id:'h7q7', topic:'Procesgerichte keuzes bij besturing', bloom:'onthouden',
         q:'Hoe wordt het "te besturen systeem" beschouwd in de visie op procesmanagement die het boek voorstaat?',
-        options:[{id:'a',text:'Als een cluster van klantgeoriënteerde processen met een groot zelfsturend vermogen, doordat er mensen in werkzaam zijn die het vermogen hebben om hetgeen ze doen bij te sturen'},{id:'b',text:'Als een geldmachine die uitsluitend op financiële variabelen gestuurd moet worden'},{id:'c',text:'Als een vaste set bedrijfsfuncties die nooit zelfsturend kunnen zijn'}],
+        options:[{id:'a',text:"Als een cluster van klantgeoriënteerde processen met een groot zelfsturend vermogen, doordat mensen hun werk kunnen bijsturen"},{id:'b',text:"Als een geldmachine die uitsluitend op economische en financiële variabelen gestuurd moet worden door het management"},{id:'c',text:"Als een vaste set bedrijfsfuncties en afdelingen die nooit zelfsturend kunnen zijn en daarom aansturing van boven vragen"}],
         correct:'a', explanation:'Dit is letterlijk de visie die het boek in paragraaf 7.3 voorstaat.'},
       {id:'h7q8', topic:'Procesgerichte keuzes bij besturing', bloom:'begrijpen',
         q:'Wat is het uitgangspunt in een procesgerichte organisatie met betrekking tot verantwoordelijkheden en bevoegdheden?',
-        options:[{id:'a',text:'Dat verantwoordelijkheden en bevoegdheden altijd tot in detail centraal worden vastgelegd door de directie'},{id:'b',text:'Dat verantwoordelijkheden zo laag mogelijk in de organisatie worden gelegd, met kaders waarbinnen ieder individu en team verantwoordelijk is voor het eigen handelen en daarover verantwoording moet afleggen'},{id:'c',text:'Dat teams nooit verantwoording hoeven af te leggen over hun beslissingen'}],
+        options:[{id:'a',text:"Dat verantwoordelijkheden altijd tot in detail centraal worden vastgelegd door de directie, zonder ruimte voor eigen kaders van teams en individuen"},{id:'b',text:"Verantwoordelijkheden zo laag mogelijk leggen, met kaders waarbinnen ieder individu en team verantwoordelijk is voor eigen handelen en verantwoording aflegt"},{id:'c',text:"Dat teams nooit verantwoording hoeven af te leggen over hun beslissingen, omdat alleen het eindresultaat van de organisatie telt voor de directie"}],
         correct:'b', explanation:'Dit is letterlijk het uitgangspunt dat het boek noemt voor een procesgerichte organisatie.'},
       {id:'h7q9', topic:'Procesgerichte keuzes bij besturing', bloom:'toepassen',
         q:'Een besturend orgaan besteedt zijn tijd vooral aan het afstemmen van doelen met teams en het wegnemen van belemmeringen, in plaats van het gedetailleerd voorschrijven van elke stap. Past dit bij de rol die het boek aan het besturend orgaan toekent in een procesgerichte organisatie?',
-        options:[{id:'a',text:'Nee, want het besturend orgaan moet in een procesgerichte organisatie juist elke stap gedetailleerd voorschrijven'},{id:'b',text:'Nee, want faciliteren is volgens het boek nooit een taak van het besturend orgaan'},{id:'c',text:'Ja, de rol van het besturend orgaan moet vooral gericht zijn op het afstemmen op doelen en het faciliteren van het bestuurd systeem om optimaal te kunnen werken'}],
+        options:[{id:'a',text:"Nee, want het besturend orgaan moet in een procesgerichte organisatie juist elke stap gedetailleerd voorschrijven aan alle teams"},{id:'b',text:"Nee, want faciliteren is volgens het boek nooit een taak van het besturend orgaan, dat alleen controleert op de uitvoering"},{id:'c',text:"Ja, het besturend orgaan richt zich vooral op afstemmen op doelen en faciliteren van het bestuurd systeem om optimaal te werken"}],
         correct:'c', explanation:'Dit is letterlijk de rol die het boek aan het besturend orgaan toekent.'},
       {id:'h7q10', topic:'Drie typen proceseigenaarschap', bloom:'onthouden',
         q:'Welke drie typen proceseigenaarschap onderscheidt het boek (figuur 7.3)?',
-        options:[{id:'a',text:'Type 1 (procesontwikkeling en -implementatie), type 2 (plus procesbesturing) en type 3 (plus lijnverantwoordelijkheid over mensen en middelen)'},{id:'b',text:'Type A (strategisch), type B (tactisch) en type C (operationeel)'},{id:'c',text:'Type 1 (financieel), type 2 (klantgericht) en type 3 (ICT-gericht)'}],
+        options:[{id:'a',text:"Type 1 (procesontwikkeling en -implementatie), type 2 (plus procesbesturing) en type 3 (plus lijnverantwoordelijkheid voor mensen en middelen)"},{id:'b',text:"Type A (alleen procesvastlegging), type B (ook procesaudits) en type C (ook directieverantwoordelijkheid voor alle klantresultaten)"},{id:'c',text:"Type 1 (strategisch en tactisch), type 2 (operationeel en logistiek) en type 3 (financieel en controlerend, met budgetverantwoordelijkheid)"}],
         correct:'a', explanation:'Dit zijn letterlijk de drie typen proceseigenaarschap die het boek onderscheidt.'},
       {id:'h7q11', topic:'Drie typen proceseigenaarschap', bloom:'begrijpen',
         q:'Wat verandert er aan de bestaande organisatie wanneer gekozen wordt voor proceseigenaarschap type 3, in vergelijking met type 1 of 2?',
-        options:[{id:'a',text:'Bij type 3 verdwijnt het proceseigenaarschap volledig uit de organisatie'},{id:'b',text:'Bij type 3 "kantelt" de oude hiërarchische lijnorganisatie en volgt deze de indeling naar processen, terwijl bij type 1 en 2 de bestaande organisatie nog gewoon in stand kan blijven'},{id:'c',text:'Er verandert niets, de drie typen zijn in de praktijk identiek'}],
+        options:[{id:'a',text:"Bij type 3 verdwijnt het proceseigenaarschap uit de organisatie en nemen de afdelingen de besturing van de processen volledig over van de directie"},{id:'b',text:"Bij type 3 kantelt de lijnorganisatie en volgt de indeling naar processen; bij type 1 en 2 kan de bestaande organisatie blijven"},{id:'c',text:"Er verandert niets aan de bestaande organisatie, want de drie typen zijn in de praktijk identiek en verschillen alleen in naamgeving en functietitel"}],
         correct:'b', explanation:'Het boek beschrijft dit verschil letterlijk zo tussen type 3 en de typen 1 en 2.'},
       {id:'h7q12', topic:'Drie typen proceseigenaarschap', bloom:'toepassen',
         q:'Een proceseigenaar is verantwoordelijk voor het ontwerp, de verbetering en de invoering van een proces, en kan op basis van resultaten ook aanpassingen in het ontwerp doorvoeren, maar heeft geen directe lijnverantwoordelijkheid over de mensen die het proces uitvoeren. Welk type proceseigenaarschap past hierbij?',
@@ -1453,11 +1461,11 @@ const CHAPTERS = [
         correct:'c', explanation:'Procesbesturingsverantwoordelijkheid zonder lijnverantwoordelijkheid over mensen en middelen is precies type 2.'},
       {id:'h7q13', topic:'Invulling voorwaarde 1 en 2', bloom:'onthouden',
         q:'Wat is volgens het boek het ideale model van het bestuurd systeem, dat invulling geeft aan de eerste voorwaarde voor effectieve besturing?',
-        options:[{id:'a',text:'Procesmodellen, zeker in de vorm van een proceskapstok die de samenhang tussen toegevoegde waarde en procesinrichting zichtbaar maakt'},{id:'b',text:'Het jaarverslag van de organisatie'},{id:'c',text:'Een organogram van de hiërarchische structuur'}],
+        options:[{id:'a',text:"Procesmodellen, zeker in de vorm van een proceskapstok die de samenhang tussen toegevoegde waarde en procesinrichting zichtbaar maakt"},{id:'b',text:"Het jaarverslag van de organisatie, waarin de financiële resultaten van het afgelopen jaar voor aandeelhouders worden samengevat"},{id:'c',text:"Een organogram van de hiërarchische structuur, waarin de rapportagelijnen tussen directie en afdelingen zichtbaar worden gemaakt"}],
         correct:'a', explanation:'Het boek noemt procesmodellen, met name in de vorm van een proceskapstok, letterlijk als het ideale model van het bestuurd systeem.'},
       {id:'h7q14', topic:'Invulling voorwaarde 1 en 2', bloom:'begrijpen',
         q:'Wat is een "doelstellingenhiërarchie" en waarom is die belangrijk voor de tweede voorwaarde (heldere doelen)?',
-        options:[{id:'a',text:'Een lijst van alle KPI\'s van de organisatie zonder onderlinge samenhang'},{id:'b',text:'Een stelsel van hogere en lagere doelstellingen waarin lagere doelstellingen eenduidig zijn afgeleid van hogere, zodat bedrijfsdoelstellingen vertaald worden naar doelstellingen voor bedrijfs- en werkprocessen en alle activiteiten gericht blijven op een resultaat voor de klant'},{id:'c',text:'Een synoniem voor het organogram van de afdelingen'}],
+        options:[{id:'a',text:"Een lijst van alle KPI's van de organisatie zonder onderlinge samenhang, waarbij elke afdeling zelf bepaalt welke indicatoren er worden gevolgd"},{id:'b',text:"Een stelsel van hogere en lagere doelstellingen, met lagere eenduidig afgeleid van hogere, zodat alle activiteiten op een klantresultaat gericht blijven"},{id:'c',text:"Een synoniem voor het organogram van de afdelingen, dat de rangorde tussen managers vastlegt en de voorwaarde van heldere doelen daarmee invult"}],
         correct:'b', explanation:'Dit is letterlijk de definitie en functie van een doelstellingenhiërarchie zoals het boek die geeft.'},
       {id:'h7q15', topic:'Invulling voorwaarde 1 en 2', bloom:'toepassen',
         q:'Een organisatie leidt de doelstellingen voor haar werkprocessen rechtstreeks af van de doelstellingen van het bijbehorende bedrijfsproces, die op hun beurt zijn afgeleid van de strategische visie en missie. Welk hulpmiddel past hierbij, zoals het boek dat noemt bij voorwaarde 2?',
@@ -1465,23 +1473,23 @@ const CHAPTERS = [
         correct:'c', explanation:'Dit is letterlijk de functie van een doelstellingenhiërarchie: lagere doelstellingen eenduidig afleiden van hogere.'},
       {id:'h7q16', topic:'Invulling voorwaarde 3 (KSF/KPI)', bloom:'onthouden',
         q:'Wat is een "kritieke succesfactor" (KSF), zoals het boek die definieert?',
-        options:[{id:'a',text:'Een factor die van doorslaggevende betekenis is voor het bereiken van een procesdoel'},{id:'b',text:'Een synoniem voor een kritieke prestatie-indicator (KPI)'},{id:'c',text:'Een financiële norm die uitsluitend door de controller wordt vastgesteld'}],
+        options:[{id:'a',text:"Een factor die van doorslaggevende betekenis is voor het bereiken van een procesdoel"},{id:'b',text:"Een synoniem voor een kritieke prestatie-indicator, dus een meetbare grootheid met norm"},{id:'c',text:"Een financiële norm die uitsluitend door de controller wordt vastgesteld voor de afdeling"}],
         correct:'a', explanation:'Dit is letterlijk de definitie van een kritieke succesfactor uit het boek.'},
       {id:'h7q17', topic:'Invulling voorwaarde 3 (KSF/KPI)', bloom:'begrijpen',
         q:'Wat is het verschil tussen input-, throughput- en outputindicatoren, zoals het boek die bij KPI\'s onderscheidt?',
-        options:[{id:'a',text:'Dit zijn drie namen voor exact dezelfde soort indicator'},{id:'b',text:'Inputindicatoren geven aan hoeveel of welke kwaliteit input wordt geleverd, throughputindicatoren geven een indicatie van hoe goed het proces verloopt, en outputindicatoren zeggen iets over het eindresultaat'},{id:'c',text:'Inputindicatoren gaan over geld, throughputindicatoren over tijd en outputindicatoren over klanttevredenheid'}],
+        options:[{id:'a',text:"Dit zijn drie namen voor exact dezelfde soort indicator, die alleen verschillen in de fase van het jaar waarin ze worden gemeten door de controller"},{id:'b',text:"Inputindicatoren geven hoeveel of welke kwaliteit input wordt geleverd, throughputindicatoren hoe goed het proces verloopt, outputindicatoren het eindresultaat"},{id:'c',text:"Inputindicatoren gaan over geld, throughputindicatoren over tijd en outputindicatoren over klanttevredenheid, waarbij elke KPI precies één type heeft"}],
         correct:'b', explanation:'Dit is letterlijk het onderscheid dat het boek maakt tussen de drie typen proces-KPI\'s.'},
       {id:'h7q18', topic:'Invulling voorwaarde 3 (KSF/KPI)', bloom:'toepassen',
         q:'Een organisatie stuurt op KPI\'s per afdeling, maar merkt dat de optelsom van deze KPI\'s niet leidt tot het beste resultaat voor de klant. Wat adviseert het boek om dit probleem te doorbreken?',
-        options:[{id:'a',text:'Stoppen met het meten van KPI\'s, want meten leidt toch nooit tot goede klantresultaten'},{id:'b',text:'Alle KPI\'s uitsluitend bij de financiële afdeling beleggen'},{id:'c',text:'KPI\'s vanuit processen definiëren en beleggen bij de proceseigenaar, in plaats van uitsluitend per afdeling'}],
+        options:[{id:'a',text:"Stoppen met het meten van KPI's, want meten leidt volgens het boek nooit tot goede klantresultaten"},{id:'b',text:"Alle KPI's uitsluitend bij de financiële afdeling beleggen, zodat er één eenduidig rapport komt"},{id:'c',text:"KPI's vanuit processen definiëren en beleggen bij de proceseigenaar, niet alleen per afdeling"}],
         correct:'c', explanation:'Dit is letterlijk het advies dat het boek geeft om dit probleem te doorbreken.'},
       {id:'h7q19', topic:'Invulling voorwaarde 4 en 5', bloom:'onthouden',
         q:'Wat is de belangrijke verschuiving die het boek noemt bij voorwaarde 4, met betrekking tot "planning en control" (P&C)?',
-        options:[{id:'a',text:'P&C is niet meer iets van de controller alleen, maar wordt steeds meer een taak van alle proceseigenaren met besturende verantwoordelijkheden'},{id:'b',text:'P&C wordt in een procesgerichte organisatie volledig afgeschaft'},{id:'c',text:'P&C wordt uitsluitend nog door de ICT-afdeling uitgevoerd'}],
+        options:[{id:'a',text:"P&C is niet meer van de controller alleen, maar een taak van alle proceseigenaren"},{id:'b',text:"P&C wordt in een procesgerichte organisatie volledig afgeschaft door de directie"},{id:'c',text:"P&C wordt uitsluitend nog door de ICT-afdeling uitgevoerd in de systemen"}],
         correct:'a', explanation:'Dit is letterlijk de verschuiving die het boek beschrijft bij voorwaarde 4.'},
       {id:'h7q20', topic:'Invulling voorwaarde 4 en 5', bloom:'begrijpen',
         q:'Waarom waarschuwt het boek ervoor dat managers te veel gaan vertrouwen op geaggregeerde meetgegevens uit systemen?',
-        options:[{id:'a',text:'Omdat geaggregeerde gegevens wettelijk niet gebruikt mogen worden voor sturing'},{id:'b',text:'Omdat echt sturen alleen kan als er voldoende feeling is met het proces waaraan sturing gegeven wordt, zeker bij primaire processen met veel klantinteractie'},{id:'c',text:'Omdat systemen nooit betrouwbare gegevens kunnen leveren'}],
+        options:[{id:'a',text:"Omdat geaggregeerde gegevens wettelijk niet gebruikt mogen worden voor sturing van processen, zeker niet bij primaire processen met klantinteractie"},{id:'b',text:"Omdat echt sturen alleen kan met voldoende feeling met het proces waaraan sturing wordt gegeven, zeker bij primaire processen met veel klantinteractie"},{id:'c',text:"Omdat systemen nooit betrouwbare gegevens kunnen leveren over processen, zeker niet bij primaire processen met veel klantinteractie en maatwerk"}],
         correct:'b', explanation:'Dit is letterlijk de reden die het boek geeft voor deze waarschuwing.'},
       {id:'h7q21', topic:'Invulling voorwaarde 4 en 5', bloom:'toepassen',
         q:'Een proces heeft resultaten die niet eenduidig meetbaar zijn én waarvan het verloop ook niet eenduidig/voorspelbaar is. Welke vorm van sturing ligt dan het meest voor de hand, volgens de matrix in figuur 7.5?',
@@ -1489,15 +1497,15 @@ const CHAPTERS = [
         correct:'c', explanation:'Het boek stelt dat bij een onduidelijk proces met niet-eenduidig resultaat de stuurmogelijkheden vaker het karakter van inputsturing zullen hebben.'},
       {id:'h7q22', topic:'Outside-insturing en inside-outsturing', bloom:'onthouden',
         q:'Hoe noemt het boek de sturing vanuit het besturend orgaan, versus de sturing vanuit mensen die direct betrokken zijn bij de procesuitvoering?',
-        options:[{id:'a',text:'Outside-insturing (vanuit het besturend orgaan) en inside-outsturing (vanuit de mensen zelf)'},{id:'b',text:'Top-sturing en bodem-sturing'},{id:'c',text:'Harde sturing en zachte sturing'}],
+        options:[{id:'a',text:"Outside-insturing (vanuit het besturend orgaan) en inside-outsturing (vanuit de mensen zelf)"},{id:'b',text:"Top-sturing (vanuit het besturend orgaan) en bodem-sturing (vanuit de mensen zelf)"},{id:'c',text:"Harde sturing (vanuit het besturend orgaan) en zachte sturing (vanuit mensen zelf)"}],
         correct:'a', explanation:'Dit zijn letterlijk de termen die het boek gebruikt voor deze twee vormen van sturing.'},
       {id:'h7q23', topic:'Outside-insturing en inside-outsturing', bloom:'begrijpen',
         q:'Waarom is sturing van binnenuit (inside-outsturing) volgens het boek minstens zo belangrijk als sturing van buitenaf, zeker bij professionals?',
-        options:[{id:'a',text:'Omdat sturing van buitenaf volgens het boek nooit effectief kan zijn'},{id:'b',text:'Omdat professionals volgens het boek geen enkele sturing nodig hebben'},{id:'c',text:'Omdat het zeer efficiënt is als mensen zelf zoveel informatie en kennis hebben dat vanzelfsprekend het meest gewenste gedrag wordt vertoond, waardoor het besturend orgaan maar beperkt stuurmaatregelen hoeft in te zetten'}],
+        options:[{id:'a',text:"Omdat sturing van buitenaf volgens het boek nooit effectief kan zijn bij professionals die in teams werken"},{id:'b',text:"Omdat professionals volgens het boek geen enkele sturing nodig hebben, ook niet vanuit het besturend orgaan"},{id:'c',text:"Omdat mensen zelf zoveel informatie en kennis kunnen hebben dat het gewenste gedrag vanzelf ontstaat, zeer efficiënt"}],
         correct:'c', explanation:'Dit is letterlijk de reden die het boek geeft voor het belang van inside-outsturing.'},
       {id:'h7q24', topic:'Outside-insturing en inside-outsturing', bloom:'toepassen',
         q:'Medewerkers komen bij een afwijking van een indicator met concrete verbetersuggesties in plaats van excuses, en bespreken openlijk wat er aan de hand is. Wat illustreert dit volgens tabel 7.1?',
-        options:[{id:'a',text:'Dat de sturing veel te rigide is'},{id:'b',text:'Dat er helemaal geen sturing aanwezig is in deze organisatie'},{id:'c',text:'Dat de sturing motiverend werkt in plaats van rigide'}],
+        options:[{id:'a',text:"Dat de sturing veel te rigide is en medewerkers de indicatoren manipuleren"},{id:'b',text:"Dat er helemaal geen sturing aanwezig is in deze organisatie, volgens tabel 7.1"},{id:'c',text:"Dat de sturing motiverend werkt in plaats van rigide, volgens tabel 7.1"}],
         correct:'c', explanation:'Dit gedrag staat letterlijk in de kolom "als sturing motiveert" van tabel 7.1.'},
       {id:'h7q25', topic:'De twaalf stappen van de proceskapstok', bloom:'onthouden',
         q:'Hoeveel stappen noemt het boek om met behulp van de proceskapstok te komen tot procesgerichte besturing?',
@@ -1509,11 +1517,11 @@ const CHAPTERS = [
         correct:'b', explanation:'Dit is letterlijk waarvoor SMART staat volgens het kader in het boek.'},
       {id:'h7q27', topic:'De twaalf stappen van de proceskapstok', bloom:'toepassen',
         q:'Een team formuleert voor een bedrijfsproces vier KSF\'s, met per KSF twee KPI\'s die elk één norm en één meetprocedure hebben. Sluit deze aanpak aan bij de methode die het boek in stap 7 beschrijft?',
-        options:[{id:'a',text:'Nee, want het boek staat altijd precies één KSF per bedrijfsproces toe'},{id:'b',text:'Nee, want KPI\'s mogen volgens het boek nooit een norm hebben'},{id:'c',text:'Ja, dit valt binnen de door het boek genoemde richtlijnen (minimaal twee en maximaal vijf KSF\'s per bedrijfsproces, met KPI\'s, normen en meetprocedures binnen de gestelde marges)'}],
+        options:[{id:'a',text:"Nee, want het boek staat altijd precies één KSF per bedrijfsproces toe, met één KPI per KSF en één norm per KPI"},{id:'b',text:"Nee, want KPI's mogen volgens het boek nooit een norm hebben, omdat een norm alleen bij een KSF hoort en niet bij een meter"},{id:'c',text:"Ja, dit valt binnen de richtlijnen van het boek: twee tot vijf KSF's per bedrijfsproces, met KPI's, normen en meetprocedures binnen de marges"}],
         correct:'c', explanation:'Vier KSF\'s met elk twee KPI\'s, één norm en één meetprocedure valt binnen de marges die het boek in stap 7 geeft.'},
       {id:'h7q28', topic:"Stap 4: besturende processen", bloom:'begrijpen',
         q:"Waarop is stap 4 van het stappenplan, het inrichten van besturende processen, vooral gericht?",
-        options:[{id:'a',text:"Op het dagelijks voorschrijven van elke processtap"},{id:'b',text:"Op langcyclische besturing, zoals het monitoren en evalueren van procesprestaties"},{id:'c',text:"Op het verdelen van het budget over afdelingen"}],
+        options:[{id:'a',text:"Op het dagelijks voorschrijven van elke processtap, per medewerker en per afdeling"},{id:'b',text:"Op langcyclische besturing, zoals het monitoren en evalueren van procesprestaties"},{id:'c',text:"Op het verdelen van het budget over de afdelingen, aan de hand van de begroting"}],
         correct:'b', explanation:"Stap 4 richt zich vooral op langcyclische besturing: informatie verzamelen over ontwikkelingen, doelen en plannen formuleren of bijstellen, procesprestaties monitoren en evalueren, besluiten nemen over bijsturing en bijsturingsmaatregelen implementeren."},
       {id:'h7q29', topic:"Stap 9: KSF's en KPI's per werkproces", bloom:'begrijpen',
         q:"Waarop zijn afdelings-KPI's en proces-KPI's volgens het boek (stap 9) vooral gericht?",
@@ -1692,15 +1700,15 @@ const CHAPTERS = [
         correct:'a', explanation:"Het introduceren van (meer) coachend leiderschap en het verbeteren van samenwerkingscompetenties noemt het boek als voorbeelden van warme organisatieverandering: een benadering gericht op leren en op de mens in plaats van op systemen of structuren."},
       {id:'h11q9', topic:"Koude en warme verandertrajecten", bloom:'toepassen',
         q:"Een organisatie voegt twee afdelingen samen en wijzigt de verantwoordelijkheidsverdeling. Hoe typeert het boek dit?",
-        options:[{id:'a',text:"Als warme verandering, omdat het mensen raakt"},{id:'b',text:"Als warme verandering, omdat het cultuur raakt"},{id:'c',text:"Als koude verandering, gericht op de organisatiestructuur"}],
+        options:[{id:'a',text:"Als warme verandering, omdat het vooral mensen en hun onderlinge werkrelaties raakt"},{id:'b',text:"Als warme verandering, omdat het de cultuur en de samenwerking tussen teams raakt"},{id:'c',text:"Als koude verandering, gericht op de organisatiestructuur en de taakverdeling"}],
         correct:'c', explanation:"Het samenvoegen van afdelingen en het veranderen van de verantwoordelijkheidsverdeling noemt het boek expliciet als koude organisatieverandering van het type reorganisatie, gericht op de organisatiestructuur."},
       {id:'h11q10', topic:"Koude en warme procesbenadering", bloom:'begrijpen',
         q:"Waar gaat een 'koude' benadering van procesmanagement van uit?",
-        options:[{id:'a',text:"Dat alles volgens een logische aanpak op papier wordt uitgewerkt"},{id:'b',text:"Dat processen mensen binden aan een gezamenlijke missie"},{id:'c',text:"Dat mensen zich vanzelf ontwikkelen zonder afspraken"}],
+        options:[{id:'a',text:"Dat alles volgens een logische aanpak op papier wordt uitgewerkt"},{id:'b',text:"Dat processen mensen binden aan een gezamenlijke missie en doelstellingen"},{id:'c',text:"Dat mensen zich vanzelf ontwikkelen zonder vaste afspraken vooraf"}],
         correct:'a', explanation:"Een koude benadering gaat ervan uit dat volgens een logische aanpak alle stappen doorlopen worden en dus alles (ontwerp en inrichting) wordt uitgewerkt op papier, inclusief competenties, houding en gedrag. Een warme benadering ziet inzicht in processen juist als manier om mensen aan een gezamenlijke missie en doelstellingen te binden."},
       {id:'h11q11', topic:"Koude en warme procesbenadering", bloom:'onthouden',
         q:"Wat is de boodschap van het boek over een succesvol verandertraject richting procesgericht organiseren?",
-        options:[{id:'a',text:"Het bevat vooral koude elementen"},{id:'b',text:"Het bevat vooral warme elementen"},{id:'c',text:"Het bevat zowel koude als warme elementen"}],
+        options:[{id:'a',text:"Het bevat vooral koude elementen, zoals ontwerp en vaste afspraken"},{id:'b',text:"Het bevat vooral warme elementen, zoals motivatie en binding"},{id:'c',text:"Het bevat zowel koude als warme elementen, die elkaar aanvullen"}],
         correct:'c', explanation:"Een van de boodschappen van het boek is dat een succesvol verandertraject richting procesgericht organiseren zowel koude als warme elementen zal bevatten: mensen moeten gemotiveerd zijn en zich verbonden voelen, maar er moeten ook heldere afspraken zijn."},
       {id:'h11q12', topic:"Algemene succesfactoren voor veranderen", bloom:'begrijpen',
         q:"Welke combinatie is volgens het boek het meest effectief om urgentie te laten voelen?",
@@ -1716,11 +1724,11 @@ const CHAPTERS = [
         correct:'a', explanation:"Het boek adviseert niet te duwen en te trekken, maar ruimte te zoeken om door te vragen naar de reden van de onwil en te achterhalen wat iemand wél wil. Duwen en trekken is de reactie waarbij een interactieregel speelt: 'Je krijgt wat je oproept.'"},
       {id:'h11q15', topic:"Algemene succesfactoren voor veranderen", bloom:'begrijpen',
         q:"Waarom kan weerstand in een systeem volgens het boek ook nuttig zijn?",
-        options:[{id:'a',text:"Omdat het aantoont dat de verandering overbodig is"},{id:'b',text:"Omdat het voorkomt dat elk nieuw idee direct wordt uitgevoerd"},{id:'c',text:"Omdat het altijd wijst op een slecht veranderplan"}],
+        options:[{id:'a',text:"Omdat het aantoont dat de verandering overbodig is voor de organisatie"},{id:'b',text:"Omdat het voorkomt dat met ieder nieuw idee direct aan de slag wordt gegaan"},{id:'c',text:"Omdat het altijd wijst op een slecht opgezet veranderplan van de leiding"}],
         correct:'b', explanation:"Weerstand is een natuurlijke afweer tegen aantasting van een bekende, veilige situatie. In organisaties helpt weerstand voorkomen dat met ieder nieuw idee meteen aan de slag wordt gegaan, wat soms een hoop ellende kan besparen."},
       {id:'h11q16', topic:"Leervermogen vergroten", bloom:'begrijpen',
         q:"Wat bedoelt het boek met 'leren' in het kader van het vergroten van leervermogen?",
-        options:[{id:'a',text:"Het zich eigen maken van leerstof in een opleiding"},{id:'b',text:"Het naleven van vastgelegde afspraken en procedures"},{id:'c',text:"Het vermogen van mensen om zich telkens te blijven vernieuwen"}],
+        options:[{id:'a',text:"Het zich eigen maken van leerstof in een opleiding of cursus"},{id:'b',text:"Het naleven van vastgelegde afspraken en procedures in de organisatie"},{id:'c',text:"Het vermogen van mensen om zich telkens te blijven vernieuwen"}],
         correct:'c', explanation:"Het boek zegt dat leren niet in enge zin (het zich eigen maken van leerstof) moet worden opgevat, maar duidt op het vermogen van mensen in organisaties om zich telkens te blijven vernieuwen."},
       {id:'h11q17', topic:"Veranderen op managementniveau", bloom:'onthouden',
         q:"Wat is volgens het boek een van de redenen waarom (top)management BPM-initiatieven meestal niet spontaan ondersteunt?",
@@ -1728,7 +1736,7 @@ const CHAPTERS = [
         correct:'a', explanation:"Een van de redenen is dat processen in de meeste managementopleidingen weinig aandacht krijgen. Vooral in MBA-opleidingen staat de functionele benadering van organisaties nog steeds centraal."},
       {id:'h11q18', topic:"Veranderen op managementniveau", bloom:'toepassen',
         q:"Een BPM-professional wil het management in beweging krijgen voor procesverbetering. Welk advies geeft het boek?",
-        options:[{id:'a',text:"Het management vanuit het niets overtuigen van een organisatiebreed programma"},{id:'b',text:"Aansluiten bij problemen of doelstellingen die al hoog op de agenda staan"},{id:'c',text:"Wachten tot een nieuw management aantreedt"}],
+        options:[{id:'a',text:"Het management vanuit het niets overtuigen van een organisatiebreed programma"},{id:'b',text:"Aansluiten bij problemen of doelstellingen die al hoog op de agenda staan"},{id:'c',text:"Wachten tot een nieuwe directie aantreedt en dan een plan presenteren"}],
         correct:'b', explanation:"Het eerste advies is om het management niet vanuit het niets te proberen te overtuigen van een organisatiebreed procesverbeteringsprogramma, maar aan te sluiten bij problemen of doelstellingen die al hoog op de managementagenda staan."},
       {id:'h11q19', topic:"Veranderen op managementniveau", bloom:'begrijpen',
         q:"Waarom adviseert het boek om te bouwen aan eigen competenties en goede resultaten bij kleinere verbetertrajecten?",
@@ -1752,7 +1760,7 @@ const CHAPTERS = [
         correct:'a', explanation:"Hoewel tabel 11.1 een einde zou kunnen suggereren, is veranderen in een procesgericht verandertraject een continu proces dat nooit meer ophoudt. Het eindplaatje hoeft niet in één keer te worden bereikt: dat gaat stap voor stap, terwijl het ideaalbeeld regelmatig opnieuw wordt bekeken en bijgesteld."},
       {id:'h11q24', topic:"Procesportfoliomanagement", bloom:'begrijpen',
         q:"Waarvoor wordt procesportfoliomanagement gebruikt bij procesgericht veranderen?",
-        options:[{id:'a',text:"Om alle processen gelijktijdig en even sterk te veranderen"},{id:'b',text:"Om met prestatie-indicatoren het meeste verbeterpotentieel te vinden"},{id:'c',text:"Om per afdeling een eigen verbeterprogramma op te stellen"}],
+        options:[{id:'a',text:"Om alle processen tegelijk en even sterk te veranderen in één slag"},{id:'b',text:"Om met prestatie-indicatoren het meeste verbeterpotentieel te vinden"},{id:'c',text:"Om per afdeling een eigen verbeterprogramma op te stellen en te sturen"}],
         correct:'b', explanation:"Procesportfoliomanagement beheert alle werkprocessen als een portfolio. Aan de hand van prestatie-indicatoren per proces bepaal je in welke processen het grootste verbeterpotentieel zit. Zo wordt schaarse verandercapaciteit gericht, houden betrokkenen overzicht en voorkom je dat het ene proces wordt geoptimaliseerd ten koste van een ander."},
       {id:'h11q25', topic:"Succesfactoren toegepast op procesgericht veranderen", bloom:'toepassen',
         q:"Een organisatie wil bij de naam van het initiatief de associatie met veel papierwerk vermijden. Welk advies geeft het boek?",
@@ -1780,11 +1788,11 @@ const CHAPTERS = [
         correct:'b', explanation:"In stap 3 trek je op iedere flap een verticale lijn met een schaalverdeling van 1 tot 10. Bij nummer 1 komt het meest effectieve gedrag, bij nummer 10 het minst effectieve gedrag. Zijn alle incidenten gerangschikt, dan kan de groep eventueel nog incidenten bedenken voor de lege plekken op de schaal."},
       {id:'h11q31', topic:"Procesgaming en losdenken", bloom:'begrijpen',
         q:"Wat is volgens het boek een belangrijke succesfactor bij de inzet van procesgames?",
-        options:[{id:'a',text:"Een zo groot mogelijk aantal deelnemers"},{id:'b',text:"Zoveel mogelijk verschillende games achter elkaar spelen"},{id:'c',text:"Nadenken over de doelen en over hoe je verdergaat met de inzichten"}],
+        options:[{id:'a',text:"Een zo groot mogelijk aantal deelnemers aan iedere game-sessie"},{id:'b',text:"Zoveel mogelijk verschillende games direct achter elkaar spelen"},{id:'c',text:"Nadenken over de doelen en over de opvolging van de inzichten"}],
         correct:'c', explanation:"Een belangrijke succesfactor bij procesgaming is goed nadenken over de doelstellingen die je ermee wilt bereiken en over hoe je na de inzet van de game verdergaat met de verworven inzichten."},
       {id:'h11q32', topic:"Procesgaming en losdenken", bloom:'begrijpen',
         q:"Wat bedoelt het boek met 'losdenken'?",
-        options:[{id:'a',text:"Circulair denken in plaats van lineair denken in oorzaak-gevolg"},{id:'b',text:"Lineair denken in actie-reactie en probleem-oplossing"},{id:'c',text:"Medewerkers los van het team laten werken"}],
+        options:[{id:'a',text:"Circulair denken in plaats van lineair denken in oorzaak-gevolg"},{id:'b',text:"Lineair denken in termen van actie-reactie en oplossing"},{id:'c',text:"Medewerkers los van het team laten werken aan eigen taken"}],
         correct:'a', explanation:"Losdenken is de eenvoudiger term voor de competentie 'circulair denken'. Die staat tegenover lineair denken: het denken in termen van actie-reactie, oorzaak-gevolg en probleem-oplossing. Het helpt bestaande patronen van denken en doen te doorbreken."},
       {id:'h11q33', topic:"Archetypen en feedbackloops", bloom:'toepassen',
         q:"Op een afdeling lossen medewerkers telkens het symptoom van een probleem op, maar het probleem komt terug en wordt groter. Welk archetype past hierbij?",
@@ -1839,7 +1847,7 @@ function allQuestions() {
 function chapterById(id) { return CHAPTERS.find(c => c.id === id); }
 
 function chapterStats(chapterId) {
-  const attempts = loadAttempts().filter(a => a.type === 'oefentoets' && a.chapterId === chapterId);
+  const attempts = loadAttempts().filter(a => a.type === 'oefentoets' && a.chapterId === chapterId && !a.retry);
   if (!attempts.length) return null;
   const last = attempts[attempts.length - 1];
   return { attempts: attempts.length, lastPct: Math.round(100 * last.correctCount / last.total) };
@@ -2714,34 +2722,36 @@ function renderQuizSetup(el, {mode, chapterId}) {
       <h2 class="page-title">Klaar om te oefenen?</h2>
       <div class="card">
         <p>Deze oefentoets bevat <strong>${ch.questions.length} meerkeuzevragen</strong> over hoofdstuk ${ch.number}, verdeeld over onthouden, begrijpen en toepassen. De volgorde van vragen en antwoorden wordt elke keer opnieuw geschud.</p>
+        <label class="fb-toggle"><input type="checkbox" id="fbToggle" checked><span>Na elke vraag meteen laten zien of mijn antwoord goed of fout is, met een korte toelichting</span></label>
         <button class="btn" id="startBtn">Start oefentoets ✏️</button>
       </div>
     `;
-    el.querySelector('#startBtn').onclick = () => startQuiz({mode:'oefentoets', chapterId, questions: ch.questions.map(q=>({...q, chapterId: ch.id, chapterTitle: 'Hoofdstuk '+ch.number}))});
+    el.querySelector('#startBtn').onclick = () => startQuiz({mode:'oefentoets', chapterId, feedback: el.querySelector('#fbToggle').checked, questions: ch.questions.map(q=>({...q, chapterId: ch.id, chapterTitle: 'Hoofdstuk '+ch.number}))});
   } else {
     const qs = allQuestions();
     el.innerHTML = `
       <div class="page-eyebrow">Tentamenmodus</div>
       <h2 class="page-title">Simuleer je tentamen</h2>
       <div class="card">
-        <p>Deze tentamentraining combineert vragen uit <strong>alle beschikbare hoofdstukken</strong> (op dit moment: hoofdstuk 1 — er komen er meer bij zodra jij nieuwe hoofdstukken aanlevert). In totaal <strong>${qs.length} vragen</strong>, in willekeurige volgorde.</p>
+        <p>Deze tentamentraining combineert vragen uit <strong>alle beschikbare hoofdstukken</strong> (zie de lijst hieronder). In totaal <strong>${qs.length} vragen</strong>, in willekeurige volgorde.</p>
         <div class="setup-choice">
           ${CHAPTERS.map(c => `<div class="chapter-check">✔️ Hoofdstuk ${c.number} — ${c.title}</div>`).join('')}
         </div>
         <p style="font-size:13px; color:var(--ink-soft);">Tijdens het tentamen kun je met <strong>Terug</strong> en <strong>Volgende</strong> navigeren, vragen overslaan, en vóór het inleveren nog wijzigingen aanbrengen.</p>
+        <label class="fb-toggle"><input type="checkbox" id="fbToggleT" checked><span>Na elke vraag meteen laten zien of mijn antwoord goed of fout is, met een korte toelichting (zet uit voor een echte tentamensimulatie)</span></label>
         <button class="btn" id="startBtnT">Start tentamen 🎓</button>
       </div>
     `;
-    el.querySelector('#startBtnT').onclick = () => startQuiz({mode:'tentamen', questions: qs});
+    el.querySelector('#startBtnT').onclick = () => startQuiz({mode:'tentamen', feedback: el.querySelector('#fbToggleT').checked, questions: qs});
   }
 }
 
-function startQuiz({mode, chapterId, questions}) {
+function startQuiz({mode, chapterId, questions, feedback = true, retry = false}) {
   const shuffledQs = shuffle(questions).map(q => ({
     ...q,
     shuffledOptions: shuffle(q.options)
   }));
-  activeQuiz = { mode, chapterId, questions: shuffledQs, answers: {}, current: 0, submitted:false };
+  activeQuiz = { mode, chapterId, questions: shuffledQs, answers: {}, current: 0, submitted:false, feedback, retry, revealed: {} };
   go({view:'quiz'});
 }
 
@@ -2756,7 +2766,7 @@ function renderQuiz(el) {
   el.innerHTML = '';
   const eyebrow = document.createElement('div');
   eyebrow.className = 'page-eyebrow';
-  eyebrow.textContent = quiz.mode === 'tentamen' ? '🎓 Tentamen' : '✏️ Oefentoets — ' + (q.chapterTitle || '');
+  eyebrow.textContent = (quiz.mode === 'tentamen' ? '🎓 Tentamen' : '✏️ Oefentoets — ' + (q.chapterTitle || '')) + (quiz.retry ? ' · alleen foute vragen' : '');
   el.appendChild(eyebrow);
 
   const progRow = document.createElement('div');
@@ -2765,7 +2775,8 @@ function renderQuiz(el) {
   dots.className = 'quiz-dots';
   quiz.questions.forEach((qq, i) => {
     const d = document.createElement('div');
-    d.className = 'qdot' + (quiz.answers[qq.id] !== undefined ? ' answered' : '') + (i === idx ? ' current' : '');
+    const rv = quiz.feedback && quiz.revealed[qq.id] && quiz.answers[qq.id] !== undefined;
+    d.className = 'qdot' + (rv ? (quiz.answers[qq.id] === qq.correct ? ' ok' : ' no') : (quiz.answers[qq.id] !== undefined ? ' answered' : '')) + (i === idx ? ' current' : '');
     dots.appendChild(d);
   });
   const counter = document.createElement('div');
@@ -2789,16 +2800,32 @@ function renderQuiz(el) {
   card.appendChild(qtext);
 
   const selected = quiz.answers[q.id];
-  q.shuffledOptions.forEach(opt => {
+  const revealed = !!(quiz.feedback && quiz.revealed[q.id] && selected !== undefined);
+  q.shuffledOptions.forEach((opt, oi) => {
     const optEl = document.createElement('div');
-    optEl.className = 'option' + (selected === opt.id ? ' selected' : '');
-    optEl.innerHTML = `<div class="optletter">${opt.id.toUpperCase()}</div><div>${opt.text}</div>`;
+    let cls = 'option' + (selected === opt.id ? ' selected' : '');
+    if (revealed) cls = 'option' + (opt.id === q.correct ? ' correct' : (selected === opt.id ? ' incorrect' : ''));
+    optEl.className = cls;
+    if (revealed) optEl.style.cursor = 'default';
+    optEl.innerHTML = `<div class="optletter">${'ABC'[oi]}</div><div>${opt.text}</div>`;
     optEl.onclick = () => {
+      if (revealed) return;
       quiz.answers[q.id] = opt.id;
       render();
     };
     card.appendChild(optEl);
   });
+
+  if (revealed) {
+    const ok = selected === q.correct;
+    const correctPos = q.shuffledOptions.findIndex(o => o.id === q.correct);
+    const fb = document.createElement('div');
+    fb.className = 'feedback-box ' + (ok ? 'ok' : 'no');
+    fb.innerHTML = `<div class="fb-title">${ok ? '✅ Goed!' : '❌ Helaas, dat is niet juist.'}</div>` +
+      (ok ? '' : `<div>Het juiste antwoord is <strong>${'ABC'[correctPos]}</strong>.</div>`) +
+      `<div style="margin-top:4px;">${q.explanation}</div>`;
+    card.appendChild(fb);
+  }
 
   el.appendChild(card);
 
@@ -2814,17 +2841,24 @@ function renderQuiz(el) {
   const rightGroup = document.createElement('div');
   rightGroup.style.cssText = 'display:flex; gap:10px;';
 
+  const needsReveal = quiz.feedback && selected !== undefined && !revealed;
   if (idx < total - 1) {
     const nextBtn = document.createElement('button');
     nextBtn.className = 'btn';
-    nextBtn.textContent = 'Volgende →';
-    nextBtn.onclick = () => { quiz.current++; render(); };
+    nextBtn.textContent = revealed ? 'Volgende vraag →' : 'Volgende →';
+    nextBtn.onclick = () => {
+      if (needsReveal) { quiz.revealed[q.id] = true; render(); return; }
+      quiz.current++; render();
+    };
     rightGroup.appendChild(nextBtn);
   } else {
     const submitBtn = document.createElement('button');
     submitBtn.className = 'btn';
-    submitBtn.textContent = 'Toets inleveren ✓';
-    submitBtn.onclick = () => finishQuiz();
+    submitBtn.textContent = needsReveal ? 'Controleer mijn antwoord ✓' : (revealed ? 'Nu inleveren ✓' : 'Toets inleveren ✓');
+    submitBtn.onclick = () => {
+      if (needsReveal) { quiz.revealed[q.id] = true; render(); return; }
+      finishQuiz();
+    };
     rightGroup.appendChild(submitBtn);
   }
   navRow.appendChild(rightGroup);
@@ -2833,7 +2867,8 @@ function renderQuiz(el) {
   const jumpHint = document.createElement('p');
   jumpHint.style.cssText = 'font-size:12.5px; color:var(--ink-soft); margin-top:14px;';
   const unanswered = total - answeredCount;
-  jumpHint.textContent = unanswered > 0 ? `${unanswered} vraag/vragen nog onbeantwoord. Je kunt altijd teruggaan voordat je inlevert.` : 'Alle vragen zijn beantwoord. Je kunt nog terug om iets aan te passen, of de toets inleveren.';
+  const fbNote = quiz.feedback ? 'Na je antwoord klik je op Volgende: dan zie je meteen of het goed of fout is, met een korte toelichting. Een vraag zonder antwoord sla je over. ' : '';
+  jumpHint.textContent = fbNote + (unanswered > 0 ? `${unanswered} vraag/vragen nog onbeantwoord. Je kunt altijd teruggaan voordat je inlevert.` : 'Alle vragen zijn beantwoord. Je kunt nog terug om iets aan te passen, of de toets inleveren.');
   el.appendChild(jumpHint);
 }
 
@@ -2853,6 +2888,7 @@ function finishQuiz() {
   const attempt = {
     date: new Date().toISOString(),
     type: quiz.mode,
+    retry: !!quiz.retry,
     chapterId: quiz.chapterId || null,
     total: perQuestion.length,
     correctCount, incorrectCount, skippedCount,
@@ -2872,7 +2908,7 @@ function renderResults(el) {
   const pct = Math.round(100 * a.correctCount / a.total);
 
   el.innerHTML = `
-    <div class="page-eyebrow">${a.type === 'tentamen' ? '🎓 Tentamenresultaat' : '✏️ Oefentoetsresultaat'}</div>
+    <div class="page-eyebrow">${a.type === 'tentamen' ? '🎓 Tentamenresultaat' : '✏️ Oefentoetsresultaat'}${a.retry ? ' · alleen foute vragen' : ''}</div>
     <h2 class="page-title">Zo ging het!</h2>
     <div class="card score-hero">
       <div class="score-num">${pct}%</div>
@@ -2889,7 +2925,8 @@ function renderResults(el) {
     <div class="card" id="reviewCard"><h3>📖 Nabespreking van foute antwoorden</h3><div id="reviewList"></div></div>
 
     <div style="display:flex; gap:12px; flex-wrap:wrap;">
-      <button class="btn" id="retryBtn">Opnieuw oefenen</button>
+      ${(a.incorrectCount + a.skippedCount) > 0 ? `<button class="btn" id="retryWrongBtn">🔁 Alleen foute vragen opnieuw (${a.incorrectCount + a.skippedCount})</button>` : ''}
+      <button class="btn ${(a.incorrectCount + a.skippedCount) > 0 ? 'secondary' : ''}" id="retryBtn">Hele toets opnieuw</button>
       <button class="btn secondary" id="toProgress">Bekijk mijn voortgang 🌷</button>
       <button class="btn ghost" id="toDash">Terug naar dashboard</button>
     </div>
@@ -2955,6 +2992,11 @@ function renderResults(el) {
     if (a.type === 'tentamen') go({view:'tentamen-setup'});
     else go({view:'oefentoets-setup', chapterId: a.chapterId});
   };
+  const rwBtn = el.querySelector('#retryWrongBtn');
+  if (rwBtn) rwBtn.onclick = () => {
+    const wrongIds = new Set(a.perQuestion.filter(pq => !pq.correct).map(pq => pq.qid));
+    startQuiz({mode: a.type, chapterId: a.chapterId, questions: quiz.questions.filter(q => wrongIds.has(q.id)), feedback: quiz.feedback, retry: true});
+  };
   el.querySelector('#toProgress').onclick = () => go({view:'voortgang'});
   el.querySelector('#toDash').onclick = () => go({view:'dashboard'});
 }
@@ -2987,8 +3029,9 @@ function renderVoortgang(el) {
   const oefenen = entries.filter(e => e.pct >= 50 && e.pct < 80).sort((a,b)=>a.pct-b.pct);
   const prioriteit = entries.filter(e => e.pct < 50).sort((a,b)=>a.pct-b.pct);
 
-  const totalAttempts = attempts.length;
-  const avgPct = Math.round(100 * attempts.reduce((s,a)=>s+a.correctCount,0) / attempts.reduce((s,a)=>s+a.total,0));
+  const mainAttempts = attempts.filter(a => !a.retry);
+  const totalAttempts = mainAttempts.length;
+  const avgPct = mainAttempts.length ? Math.round(100 * mainAttempts.reduce((s,a)=>s+a.correctCount,0) / mainAttempts.reduce((s,a)=>s+a.total,0)) : 0;
 
   el.innerHTML += `
     <div class="grid cols-3" style="margin-bottom:22px;">
@@ -3017,7 +3060,7 @@ function renderVoortgang(el) {
       ${attempts.slice().reverse().map(a => {
         const pct = Math.round(100*a.correctCount/a.total);
         const d = new Date(a.date);
-        const label = a.type === 'tentamen' ? 'Tentamen (alle hoofdstukken)' : ('Oefentoets — ' + (chapterById(a.chapterId)?.title || ''));
+        const label = (a.type === 'tentamen' ? 'Tentamen (alle hoofdstukken)' : ('Oefentoets — ' + (chapterById(a.chapterId)?.title || ''))) + (a.retry ? ' (alleen foute vragen)' : '');
         return `<div class="topic-bar-row"><div class="tname">${label}<br><span style="font-size:11px; color:var(--ink-soft);">${d.toLocaleDateString('nl-NL')} ${d.toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'})}</span></div><div class="tbar"><div style="width:${pct}%; background:${pct>=80?'var(--good)':pct>=50?'var(--mid)':'var(--bad)'};"></div></div><div class="tpct">${pct}%</div></div>`;
       }).join('')}
     </div>
